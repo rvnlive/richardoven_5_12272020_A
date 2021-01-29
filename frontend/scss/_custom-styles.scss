@@ -1,0 +1,56 @@
+// Add additional styles here. For example, overwrite certain styles or add new components.
+// Tip: You can use bootstrap's powerful mixins here!
+
+
+//.alert-myalert {
+//  @include alert-variant(#60667d, #1d1d1d, #f4fdff);
+//}
+
+//@each $color, $value in $theme-colors {
+//  .alert-#{$color} {
+//    box-shadow: 3px 3px theme-color-level($color, -3);
+//  }
+//}
+
+#loading-spinner {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+        margin-top: 12%;
+        max-width: 200px;
+        height: 200px;
+    }
+
+.btn-secondary:hover,
+.btn-secondary:focus,
+.btn-secondary:target {
+    background-color: $info;
+    border-color: $primary;
+}
+//Shopping cart button //
+#cart {
+    width: 40px;
+    height: 35px;
+    &:hover {
+        filter: invert(45%) sepia(96%) saturate(3183%) hue-rotate(235deg) brightness(96%) contrast(109%);
+    }
+}
+
+#product-img {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    max-height: 160px;
+    max-width: 310px;
+}
+.card {
+    max-width: 310px;
+}
+
+
+// Footer //
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}

@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- Custom built theme - This already includes Bootstrap 4 -->
+        <link rel="stylesheet" href="css/mytheme.css">
+        <!--Remote served FontAwesome Stylesheet-->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css">
+        <title>Orinoco - Home Page</title>
+      </head>
+<body>
+    <header class="bg-primary shadow">
+        <div class="container-fluid">
+            <nav class="navbar justify-content-center navbar-expand-md navbar-dark bg-primary">
+              <a class="navbar-brand" href="index.html">
+                <img src="img/orinoco_logo.png" alt="Orinoco Logo" />
+              </a>
+              <button class="navbar-toggler bg-secondary" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div id="navbarContent" class="collapse navbar-collapse">
+                <ul class="navbar-nav ml-auto d-flex align-items-center">
+                  <li class="nav-item mr-md-3 mt-md-1 active">
+                    <a class="btn btn-secondary waves-effect shadow" href="#">Products</a>
+                  </li>
+                  <li class="nav-item pb-5 pb-md-3 pb-lg-0 pr-1" id="cart">
+                    <a class="nav-link" href="#">
+                        <img src="img/shopping-cart-solid.svg"/>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </nav>
+        </div>
+    </header>
+
+    <!--Loading spinner and Product section-->
+    <div class="container-fluid mb-5 pb-5">
+      <div id="loading-spinner" class="spinner-grow text-primary w-100" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+      <!-- Product List -->
+      <section id="product-list" class="row justify-content-center w-100">
+      </section>
+    </div>
+    
+    <!--Footer-->
+    <footer class="bg-primary fixed-bottom">
+			<div class="container">
+			  <div class="row">
+				<nav class="col navbar navbar-expand navbar-dark">
+				  <div id="navbarContent" class="collapse navbar-collapse footer-text justify-content-center">
+						<a class="nav-link text-secondary" href="index.html">Products</a>
+						<a class="nav-link text-secondary" href="#">Contact</a>
+				  </div>
+				</nav>
+			  </div>
+			</div>
+    </footer>
+    
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+            <!--JavaScript stored locally - loaded dynamically with index.js-->
+            <script src="index.js" type="module"></script>
+</body>
+</html>
