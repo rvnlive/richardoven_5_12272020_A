@@ -36,15 +36,21 @@
         filter: invert(45%) sepia(96%) saturate(3183%) hue-rotate(235deg) brightness(96%) contrast(109%);
     }
 }
-
-#product-img {
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+.price-badge {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-size: small;
+    border: none;
+}
+.img-modifier {
+    position: relative;
+    border-radius: 9px;
     max-height: 160px;
-    max-width: 310px;
+    max-width: 270px;
 }
 .card {
-    max-width: 310px;
+    max-width: 270px;
 }
 
 

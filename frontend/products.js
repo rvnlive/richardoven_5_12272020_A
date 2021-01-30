@@ -7,16 +7,32 @@ export function createProducts (product) {
 
   // Creating a ProductCard
   const newProductCard = document.createElement('div')
-  newProductCard.setAttribute('class', 'card border-secondary ml-5 mr-5 mt-5')
+  newProductCard.setAttribute('class', 'card border-secondary shadow ml-5 mr-5 mt-5')
+  // Adding a Tooltip for Visual Feedback
+  newProductCard.setAttribute('dataToggle', 'tooltip')
+  newProductCard.setAttribute('dataPlacement', 'right')
+  newProductCard.setAttribute('title', 'Tap for more information')
   newProductList.appendChild(newProductCard)
 
   // Then creating the Product within the card
-  // First the ProductImage
+  // Product Price
+  const productPrice = product.price / 100
+  const beautyPrice = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD'
+  })
+  beautyPrice.format(productPrice)
+  const newProductPrice = document.createElement('span')
+  newProductPrice.setAttribute('id', 'product-price')
+  newProductPrice.setAttribute('class', 'badge badge-pill badge-primary border-secondary text-secondary price-badge p-2')
+  newProductPrice.textContent = '$' + productPrice
+
+  // Then the ProductImage
   const productImage = product.imageUrl
   const newProductImage = document.createElement('img')
   // newProductImage.setAttribute('id', 'product-img', 'class', 'card-img-top flex-shrink-1 mw-25')
   newProductImage.setAttribute('id', 'product-img')
-  newProductImage.setAttribute('class', 'card-img-top flex-shrink-1 flex-grow-0')
+  newProductImage.setAttribute('class', 'card-img-top img-modifier border shadow flex-shrink-1 flex-grow-0')
   newProductImage.src = productImage
   newProductCard.appendChild(newProductImage)
 
@@ -34,20 +50,9 @@ export function createProducts (product) {
   // Product Description
   const productDescription = product.description
   const newProductDescription = document.createElement('p')
-  newProductDescription.setAttribute('id', 'product-description', 'class', 'card-text font-italic flex-shrink-1')
-  newProductDescription.setAttribute('class', 'card-text font-italic flex-shrink-1')
+  newProductDescription.setAttribute('id', 'product-description')
+  newProductDescription.setAttribute('class', 'card-text font-italic text-truncate flex-shrink-1 m-0')
   newProductDescription.textContent = productDescription
-  // Product Price
-  const productPrice = product.price / 100
-  const beautyPrice = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD'
-  })
-  beautyPrice.format(productPrice)
-  const newProductPrice = document.createElement('h6')
-  newProductPrice.setAttribute('id', 'product-price')
-  newProductPrice.setAttribute('class', 'card-subtitle text-secondary float-right')
-  newProductPrice.textContent = productPrice + '$'
 
   // Lets add them to its parent div - to ProductCardBody
   newProductCardBody.appendChild(newProductTitle)
