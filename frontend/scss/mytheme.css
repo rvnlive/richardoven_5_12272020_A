@@ -10417,6 +10417,10 @@ a.text-dark:hover, a.text-dark:focus {
   border-color: #f3e9f1;
 }
 
+.custom-select:hover {
+  cursor: pointer;
+}
+
 #addtocart:hover,
 .card:hover {
   -webkit-transform: scale(1.05);

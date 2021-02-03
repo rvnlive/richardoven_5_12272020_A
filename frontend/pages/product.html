@@ -11,7 +11,7 @@
         <title>Orinoco - Single Product Page</title>
       </head>
 <body>
-  <header class="bg-primary shadow">
+  <header class="bg-primary shadow rounded-bottom">
     <div class="container-fluid">
         <nav class="navbar justify-content-center navbar-expand-md navbar-dark bg-primary">
           <a class="navbar-brand" href="../index.html">
@@ -24,12 +24,12 @@
             <ul class="navbar-nav ml-auto d-flex align-items-center">
               <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0 mr-md-3 mt-md-1 bg-primary">
-                  <li class="breadcrumb-item"><a class="nav-item btn btn-secondary waves-effect shadow rounded" href="../index.html">Home</a></li>
+                  <li class="breadcrumb-item"><a class="nav-item btn btn-secondary waves-effect shadow rounded" href="../index.html" data-toggle="tooltip" data-placement="right" title="Back to Home Page">Home</a></li>
                   <li class="breadcrumb-item bg-primary rounded p-2 active" aria-current="page" id="breadcrumb-product-name">Product</li>
                 </ol>
               </nav>
               <li class="nav-item pb-5 pb-md-3 pb-lg-0 pr-1" id="cart">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="./cart/index.html" data-toggle="tooltip" data-placement="right" title="Tap to view Cart">
                     <img src="../img/shopping-cart-solid.svg"/>
                 </a>
               </li>
@@ -45,27 +45,19 @@
         <span class="sr-only">Loading...</span>
       </div>
       <section id="single-product" class="row justify-content-center mt-5 pt-5">
-            <!-- <div class="btn-group">
-              <button type="button" class="btn btn-primary text-secondary">Select lenses</button>
-              <button type="button" class="btn btn-primary text-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="sr-only">Toggle Dropdown</span>
-              </button>
-              <div class="dropdown-menu">
-                <a class="dropdown-item" href="#!">1st lens</a>
-                <a class="dropdown-item" href="#!">2nd lens</a>
-              </div>
-            </div> -->
       </section>
     </div>
 
+
     
     <!--Footer-->
-    <footer class="bg-primary fixed-bottom">
+    <footer class="bg-primary rounded fixed-bottom">
 			<div class="container">
 			  <div class="row">
-				<nav class="col navbar navbar-expand navbar-dark">
+				<nav class="col navbar navbar-expand">
 				  <div id="navbarContent" class="collapse navbar-collapse footer-text justify-content-center">
-            <a class="nav-link text-secondary font-weight-bold" href="../index.html">Home</a>
+            <a class="nav-link text-secondary font-weight-bold" href="../index.html" data-toggle="tooltip" data-placement="right" title="Back to Home Page">Home</a>
+            <p class="text-secondary font-weight-bold text-center pt-3"><script>document.write(new Date().getFullYear())</script></p>
 						<a class="nav-link text-secondary font-weight-bold" href="#">Contact</a>
 				  </div>
 				</nav>

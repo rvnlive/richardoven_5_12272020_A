@@ -32,6 +32,7 @@ export function createProducts (product) {
   const newProductImage = document.createElement('img')
   // newProductImage.setAttribute('id', 'product-img', 'class', 'card-img-top flex-shrink-1 mw-25')
   newProductImage.setAttribute('id', 'product-img')
+  newProductImage.setAttribute('alt', 'Image of an old ' + product.name)
   newProductImage.setAttribute('class', 'card-img-top img-modifier border shadow flex-shrink-1 flex-grow-0')
   newProductImage.src = productImage
   newProductCard.appendChild(newProductImage)
