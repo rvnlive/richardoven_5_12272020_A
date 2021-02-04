@@ -11,6 +11,26 @@ const cameraId = parameters.get('id')
 const singleCamera = apiUrl + cameraId
 // console.log(singleCamera)
 
+// Functions for Existing/Non-existing Carts
+const cart = []
+// First try to Load an Existing Cart
+function loadCart () {
+  const cart = JSON.parse(localStorage.getItem('shoppingCart'))
+} if (localStorage.getItem('shoppingCart') !== null) {
+  const cart = JSON.parse(localStorage.getItem('shoppingCart'))
+  loadCart()
+}
+// Save Cart
+function saveCart () {
+  localStorage.setItem('shoppingCart', JSON.stringify(cart))
+}
+
+function camera (name, price, quantity) {
+  this.name = name
+  this.price = price
+  this.count = quantity
+}
+
 // Start creating a Single Product
 const createSingleProduct = async function () {
   // Fetching a single camera
@@ -25,18 +45,18 @@ const createSingleProduct = async function () {
     document.getElementById('loading-spinner').style.display = 'none'
   }
   // Give name to the fetched response data
-  const camera = await response.json()
-  const cameraName = camera.name
-  const cameraDescription = camera.description
-  const cameraImage = camera.imageUrl
+  const cameras = await response.json()
+  const cameraName = cameras.name
+  const cameraDescription = cameras.description
+  const cameraImage = cameras.imageUrl
   // Polishing the look of the Price
-  const cameraPrice = camera.price / 100
+  const cameraPrice = cameras.price / 100
   const beautyPrice = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD'
   })
   beautyPrice.format(cameraPrice)
-  const cameraLenses = camera.lenses
+  const cameraLenses = cameras.lenses
 
   function singleProduct () {
     // Dynamic page title - gives Product Name as page title
@@ -76,7 +96,6 @@ const createSingleProduct = async function () {
     // Then lets create the Lens variation selector button with the Price
     const selectForm = document.createElement('form')
     selectForm.setAttribute('method', 'post')
-
     const lensSelectorGroup = document.createElement('select')
     lensSelectorGroup.setAttribute('id', 'selector')
     lensSelectorGroup.setAttribute('class', 'custom-select bg-secondary border-primary text-white w-50 mt-3 mb-3 mt-md-4 mt-lg-5')
@@ -89,6 +108,7 @@ const createSingleProduct = async function () {
     lensSelectorButtonDefault.setAttribute('selected', '')
     lensSelectorButtonDefault.textContent = 'Select'
     lensSelectorGroup.appendChild(lensSelectorButtonDefault)
+    // Creating an option for each of the lenses
     cameraLenses.forEach(function (lens) {
       const lensSelectorButton = document.createElement('option')
       const lensId = lens[0] + lens[1]
@@ -97,11 +117,10 @@ const createSingleProduct = async function () {
       lensSelectorButton.setAttribute('id', 'option')
       lensSelectorButton.setAttribute('value', cameraId + lensId)
       lensSelectorGroup.appendChild(lensSelectorButton)
-      // Modify Add to Cart button after choice given
+      // Modify Add to Cart button after a lens chosen
       lensSelectorGroup.addEventListener('change', (event) => {
         addToCartButton.setAttribute('value', 'Add to cart: $' + cameraPrice)
       })
-      //   console.log(lens)
     })
 
     // Fetch Single Product Price and add to page
@@ -112,7 +131,7 @@ const createSingleProduct = async function () {
 
     // Add to Cart button with Price inside
     const addToCartButton = document.createElement('input')
-    addToCartButton.setAttribute('id', 'addtocart')
+    addToCartButton.setAttribute('id', 'add-to-cart')
     addToCartButton.setAttribute('type', 'submit')
     addToCartButton.setAttribute('value', 'Select a lens')
     addToCartButton.setAttribute('class', 'btn btn-secondary mt-sm-3 mt-md-4 mt-lg-5 mr-3 mr-md-3 float-right')
@@ -132,13 +151,28 @@ const createSingleProduct = async function () {
 
     // Single Product Page containing
     newSingleProduct.appendChild(newSingleProductBody)
-
-    // Lets to give a function to the Add to Cart with Price button
-    function addToCart () {
-
-    }
-    addToCart()
   }
   singleProduct()
+
+  // Lets to give a function to the Add to Cart with Price button
+  function addToCart () {
+    const cartButton = document.getElementById('add-to-cart')
+    cartButton.addItemToCart = function (name, price, quantity) {
+      event.preventDefault()
+      for (const camera in cart) {
+        if (cart[camera].name === name) {
+          cart[camera].count++
+          saveCart()
+          document.location.reload()
+          return
+        }
+      }
+      const camera = new Camera(name, price, quantity)
+      cart.push(cameras)
+      saveCart()
+    }
+  }
+  addToCart()
+  console.log(cart)
 }
 createSingleProduct()

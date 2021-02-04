@@ -25,7 +25,7 @@ export function createProducts (product) {
   const newProductPrice = document.createElement('span')
   newProductPrice.setAttribute('id', 'product-price')
   newProductPrice.setAttribute('class', 'badge badge-pill badge-primary border-secondary text-secondary price-badge p-2')
-  newProductPrice.textContent = '$' + productPrice
+  newProductPrice.textContent = 'from $' + productPrice
 
   // Then the ProductImage
   const productImage = product.imageUrl
