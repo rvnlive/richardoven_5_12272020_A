@@ -10394,6 +10394,10 @@ a.text-dark:hover, a.text-dark:focus {
   font-size: calc(25% + 1vw + 1vh);
 }
 
+.text-shadow {
+  text-shadow: 3px 4px gray;
+}
+
 #loading-spinner {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -10415,6 +10419,10 @@ a.text-dark:hover, a.text-dark:focus {
 .btn-secondary:target {
   background-color: #e67f00;
   border-color: #f3e9f1;
+}
+
+.custom-select:hover {
+  cursor: pointer;
 }
 
 #addtocart:hover,

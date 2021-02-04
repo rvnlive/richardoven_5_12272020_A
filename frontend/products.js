@@ -17,22 +17,18 @@ export function createProducts (product) {
   // Then creating the Product within the card
   // Product Price
   const productPrice = product.price / 100
-  const beautyPrice = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD'
-  })
-  beautyPrice.format(productPrice)
   const newProductPrice = document.createElement('span')
   newProductPrice.setAttribute('id', 'product-price')
   newProductPrice.setAttribute('class', 'badge badge-pill badge-primary border-secondary text-secondary price-badge p-2')
   newProductPrice.textContent = 'from $' + productPrice
 
-  // Then the ProductImage
+  // Then the ProductImage with ProductName as Alternative Text
+  const productTitle = product.name
   const productImage = product.imageUrl
   const newProductImage = document.createElement('img')
   // newProductImage.setAttribute('id', 'product-img', 'class', 'card-img-top flex-shrink-1 mw-25')
   newProductImage.setAttribute('id', 'product-img')
-  newProductImage.setAttribute('alt', 'Image of an old ' + product.name)
+  newProductImage.setAttribute('alt', 'Image of an old ' + productTitle)
   newProductImage.setAttribute('class', 'card-img-top img-modifier border shadow flex-shrink-1 flex-grow-0')
   newProductImage.src = productImage
   newProductCard.appendChild(newProductImage)
@@ -43,7 +39,6 @@ export function createProducts (product) {
 
   // Lets fill the CardBody with Information
   // Product Name
-  const productTitle = product.name
   const newProductTitle = document.createElement('h4')
   newProductTitle.setAttribute('id', 'product-name')
   newProductTitle.setAttribute('class', 'card-title text-secondary flex-shrink-1')
@@ -63,7 +58,8 @@ export function createProducts (product) {
   newProductList.appendChild(newProductCard)
 
   // Clicking on a 'Product' card takes us to its own page
+  const productId = product._id
   newProductCard.addEventListener('click', (event) => {
-    document.location.href = './pages/product.html?id=' + product._id
+    document.location.href = './pages/product.html?id=' + productId
   })
 }

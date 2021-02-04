@@ -1,1 +1,93 @@
-ddd
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- Custom built theme - This already includes Bootstrap 4 -->
+        <link rel="stylesheet" href="../../css/mytheme.css">
+        <!--Remote served FontAwesome Stylesheet-->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css">
+        <title>Orinoco - Single Product Page</title>
+      </head>
+<body>
+  <header class="bg-primary shadow rounded-bottom">
+    <div class="container-fluid">
+        <nav class="navbar justify-content-center navbar-expand-md navbar-dark bg-primary">
+          <a class="navbar-brand" href="../../index.html">
+            <img src="../../img/orinoco_logo.png" alt="Orinoco Logo" />
+          </a>
+          <button class="navbar-toggler bg-secondary" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div id="navbarContent" class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto d-flex align-items-center">
+              <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0 mr-md-3 mt-md-1 bg-primary">
+                  <li class="breadcrumb-item"><a class="nav-item btn btn-secondary waves-effect shadow rounded" href="../../index.html" data-toggle="tooltip" data-placement="right" title="Back to Home Page">Home</a></li>
+                  <li class="breadcrumb-item bg-primary rounded p-2 active" aria-current="page">Cart</li>
+                </ol>
+              </nav>
+              <li class="nav-item pb-5 pb-md-3 pb-lg-0 pr-1" id="cart">
+                <a class="nav-link" href="./index.html" data-toggle="tooltip" data-placement="right" title="Tap to view Cart">
+                    <img src="../../img/shopping-cart-solid.svg"/>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+    </div>
+</header>
+
+    <!--Loading spinner and Product section-->
+    <div class="container">
+      <h1 class="jumbotron jumbotron-fluid bg-primary text-black text-shadow rounded-bottom shadow-lg text-center text-uppercase">Items in your cart</h1>
+      <div id="loading-spinner" class="spinner-grow text-primary w-100" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+      <section id="cart-items" class="d-flex flex-wrap justify-content-center mt-5 mb-md-5 pt-5">
+          <div class="row w-75 justify-content-center">
+              <div class="col">
+                  <img id="product-image" />
+              </div>
+              <div class="col">
+                  <h5 id="product-name">Test Name</h5>
+              </div>
+              <div class="col">
+                  <h6 id="product-price">Test $Price</h6>
+              </div>
+          </div>
+          <div class="row">
+            <button id="remove-item" class="btn btn-danger">Remove item</button>
+            <button id="remove-all-items" class="btn btn-warning ml-2 float-right">Remove all items</button>
+          </div>
+      </section>
+      <button id="remove-all-items" class="btn btn-success float-right mr-2">Checkout</button>
+      <button id="remove-all-items" class="btn btn-secondary float-right mr-2" href="../../index.html">Back to Products</button>
+    </div>
+
+
+    
+    <!--Footer-->
+    <footer class="bg-primary rounded fixed-bottom">
+			<div class="container">
+			  <div class="row">
+				<nav class="col navbar navbar-expand">
+				  <div id="navbarContent" class="collapse navbar-collapse footer-text justify-content-center">
+            <a class="nav-link text-secondary font-weight-bold" href="../../index.html" data-toggle="tooltip" data-placement="right" title="Back to Home Page">Home</a>
+            <p class="text-secondary font-weight-bold text-center pt-3"><script>document.write(new Date().getFullYear())</script></p>
+						<a class="nav-link text-secondary font-weight-bold" href="#">Contact</a>
+				  </div>
+				</nav>
+			  </div>
+			</div>
+    </footer>
+    
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+        <!--JavaScript stored locally-->
+        <script src="cart.js" type="module"></script>
+</body>
+</html>

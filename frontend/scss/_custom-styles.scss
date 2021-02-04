@@ -14,6 +14,9 @@
 .text-responsive {
   font-size: calc(25% + 1vw + 1vh);
 }
+.text-shadow {
+    text-shadow: 3px 4px gray;
+}
 
 #loading-spinner {
         display: flex;

@@ -1,35 +1,15 @@
 // JS for Home Page Product Listing
 // Bootstrap template is in use
 // Fetching a single product and creating its own page
+import { addToCart } from '../pages/cart/cart.js'
 
-// Load and/or create new Cart with products within
-const localStorage = window.localStorage
+// Load and/or create new Page with single product within
 const query = window.location.search
 const parameters = new URLSearchParams(query)
 const apiUrl = 'http://localhost:3000/api/cameras/'
 const cameraId = parameters.get('id')
 const singleCamera = apiUrl + cameraId
 // console.log(singleCamera)
-
-// Functions for Existing/Non-existing Carts
-const cart = []
-// First try to Load an Existing Cart
-function loadCart () {
-  const cart = JSON.parse(localStorage.getItem('shoppingCart'))
-} if (localStorage.getItem('shoppingCart') !== null) {
-  const cart = JSON.parse(localStorage.getItem('shoppingCart'))
-  loadCart()
-}
-// Save Cart
-function saveCart () {
-  localStorage.setItem('shoppingCart', JSON.stringify(cart))
-}
-
-function camera (name, price, quantity) {
-  this.name = name
-  this.price = price
-  this.count = quantity
-}
 
 // Start creating a Single Product
 const createSingleProduct = async function () {
@@ -67,11 +47,11 @@ const createSingleProduct = async function () {
     // Lets fill the 'Single Product' container
     const newSingleProduct = document.getElementById('single-product')
     const newSingleProductBody = document.createElement('div')
-    newSingleProductBody.setAttribute('class', 'row w-75 shadow rounded bg-primary')
+    newSingleProductBody.setAttribute('class', 'd-flex flex-wrap w-75 shadow rounded bg-primary')
     // Creating a Left and Right side column
     // Left
     const newSingleProductColumnLeft = document.createElement('div')
-    newSingleProductColumnLeft.setAttribute('class', 'col-6 rounded-left align-content-center bg-primary')
+    newSingleProductColumnLeft.setAttribute('class', 'flex-column w-50 pl-lg-3 pr-lg-3 rounded-left align-content-center bg-primary')
     // Fill it with the Product Image
     const newSingleProductImage = document.createElement('img')
     newSingleProductImage.setAttribute('id', 'product-img')
@@ -81,7 +61,7 @@ const createSingleProduct = async function () {
 
     // Right
     const newSingleProductColumnRight = document.createElement('div')
-    newSingleProductColumnRight.setAttribute('class', 'col-6 rounded-right align-content-center mt-3 mt-md-4 mt-lg-5 bg-primary')
+    newSingleProductColumnRight.setAttribute('class', 'flex-column w-50 pl-lg-3 pr-lg-3 rounded-right align-content-center mt-3 mt-md-4 mt-lg-5 bg-primary')
     // Fetch Single Product Name and add to page
     const newSingleProductName = document.createElement('h4')
     newSingleProductName.setAttribute('id', 'product-name')
@@ -153,26 +133,6 @@ const createSingleProduct = async function () {
     newSingleProduct.appendChild(newSingleProductBody)
   }
   singleProduct()
-
-  // Lets to give a function to the Add to Cart with Price button
-  function addToCart () {
-    const cartButton = document.getElementById('add-to-cart')
-    cartButton.addItemToCart = function (name, price, quantity) {
-      event.preventDefault()
-      for (const camera in cart) {
-        if (cart[camera].name === name) {
-          cart[camera].count++
-          saveCart()
-          document.location.reload()
-          return
-        }
-      }
-      const camera = new Camera(name, price, quantity)
-      cart.push(cameras)
-      saveCart()
-    }
-  }
-  addToCart()
-  console.log(cart)
 }
 createSingleProduct()
+addToCart()
