@@ -16,7 +16,7 @@ export async function fetchCameras () {
 }
 fetchCameras().then(products => {
   for (let i = 0; i < products.length; i++) {
-    console.log(products[i])
+    // console.log(products[i])
     createProducts(products[i])
   }
 })
