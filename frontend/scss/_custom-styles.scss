@@ -56,9 +56,12 @@
 #cart {
     width: 40px;
     height: 35px;
-    &:hover {
-        filter: invert(45%) sepia(96%) saturate(3183%) hue-rotate(235deg) brightness(96%) contrast(109%);
-    }
+}
+#cart-icon:hover {
+    filter: invert(45%) sepia(96%) saturate(3183%) hue-rotate(235deg) brightness(96%) contrast(109%);
+}
+#product-variation:hover {
+    cursor: pointer;
 }
 .price-badge {
     position: absolute;
@@ -66,6 +69,14 @@
     top: 10px;
     font-size: small;
     border: none;
+}
+@media screen and (max-width: 767px ) {
+    .price-badge {
+        position: relative;
+margin-top: -30px;
+margin-bottom: 30px;
+left: 30px;
+    }
 }
 .img-modifier {
     position: relative;

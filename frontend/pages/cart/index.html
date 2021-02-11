@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="../../css/mytheme.css">
         <!--Remote served FontAwesome Stylesheet-->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css">
-        <title>Orinoco - Single Product Page</title>
+        <title>Orinoco - Cart</title>
       </head>
 <body>
   <header class="bg-primary shadow rounded-bottom">
@@ -28,9 +28,10 @@
                   <li class="breadcrumb-item bg-primary rounded p-2 active" aria-current="page">Cart</li>
                 </ol>
               </nav>
-              <li class="nav-item pb-5 pb-md-3 pb-lg-0 pr-1" id="cart">
-                <a class="nav-link" href="./index.html" data-toggle="tooltip" data-placement="right" title="Tap to view Cart">
-                    <img src="../../img/shopping-cart-solid.svg"/>
+              <li class="nav-item mb-4 mb-md-5 pb-5 pb-md-3 pb-lg-0 pr-1" id="cart">
+                <a class="nav-link" href="index.html" data-toggle="tooltip" data-placement="right" title="Tap to view Cart">
+                  <span id="item-in-cart" class="badge badge-pill badge-secondary border-secondary text-white ml-4 ml-md-3 mt-0 mt-md-2">0</span>
+                  <img id="cart-icon" class="mb-md-5" src="../../img/shopping-cart-solid.svg"/>
                 </a>
               </li>
             </ul>
@@ -45,25 +46,24 @@
       <div id="loading-spinner" class="spinner-grow text-primary w-100" role="status">
         <span class="sr-only">Loading...</span>
       </div>
-      <section id="cart-items" class="d-flex flex-wrap justify-content-center mt-5 mb-md-5 pt-5">
-          <div class="row w-75 justify-content-center">
-              <div class="col">
-                  <img id="product-image" />
-              </div>
-              <div class="col">
-                  <h5 id="product-name">Test Name</h5>
-              </div>
-              <div class="col">
-                  <h6 id="product-price">Test $Price</h6>
-              </div>
-          </div>
-          <div class="row">
-            <button id="remove-item" class="btn btn-danger">Remove item</button>
-            <button id="remove-all-items" class="btn btn-warning ml-2 float-right">Remove all items</button>
-          </div>
+      <div class="row w-100 mt-5">
+        <span class="col ml-2">Product Image</span>
+        <span class="col ml-3 pl-5">Product Details</span>
+        <span class="col ml-5 pl-4">Quantity</span>
+        <span class="col mr-5 pr-4">Price</span>
+        <span class="col-0"></span>
+      </div>
+      <section id="cart-items" class="d-flex flex-wrap justify-content-center mb-md-5 pt-3">
+      <!-- Here comes the JavaScript creation -->
       </section>
-      <button id="remove-all-items" class="btn btn-success float-right mr-2">Checkout</button>
-      <button id="remove-all-items" class="btn btn-secondary float-right mr-2" href="../../index.html">Back to Products</button>
+      <div class="row w-100">
+        <div class="col">
+          <button id="checkout" class="btn btn-success ml-2 float-right">Checkout</button>
+        <button class="btn btn-secondary float-right ml-4" href="../../index.html">Back to Products</button>
+        <button id="remove-all-items" class="btn btn-warning float-right">Remove all items</button>
+      </div>
+      </div>
+      
     </div>
 
 

@@ -16,11 +16,16 @@ export function createProducts (product) {
 
   // Then creating the Product within the card
   // Product Price
-  const productPrice = product.price / 100
+  const productPrice = product.price.toLocaleString('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 2
+  })
   const newProductPrice = document.createElement('span')
   newProductPrice.setAttribute('id', 'product-price')
   newProductPrice.setAttribute('class', 'badge badge-pill badge-primary border-secondary text-secondary price-badge p-2')
-  newProductPrice.textContent = 'from $' + productPrice
+  newProductPrice.textContent = 'from ' + productPrice
 
   // Then the ProductImage with ProductName as Alternative Text
   const productTitle = product.name

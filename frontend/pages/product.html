@@ -28,9 +28,10 @@
                   <li class="breadcrumb-item bg-primary rounded p-2 active" aria-current="page" id="breadcrumb-product-name">Product</li>
                 </ol>
               </nav>
-              <li class="nav-item pb-5 pb-md-3 pb-lg-0 pr-1" id="cart">
+              <li class="nav-item mb-4 mb-md-5 pb-5 pb-md-3 pb-lg-0 pr-1" id="cart">
                 <a class="nav-link" href="./cart/index.html" data-toggle="tooltip" data-placement="right" title="Tap to view Cart">
-                    <img src="../img/shopping-cart-solid.svg"/>
+                  <span id="item-in-cart" class="badge badge-pill badge-secondary border-secondary text-white hover-white ml-4 ml-md-3 mt-0 mt-md-2">0</span>
+                    <img id="cart-icon" class="mb-md-5" src="../img/shopping-cart-solid.svg"/>
                 </a>
               </li>
             </ul>
@@ -71,5 +72,6 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
         <!--JavaScript stored locally-->
         <script src="../js/product.js" type="module"></script>
+        <script src="./cart/cart.js" type="module"></script>
 </body>
 </html>
