@@ -1,7 +1,7 @@
 // JS for Home Page Product Listing
 // Bootstrap template is in use
 // Fetching a single product and creating its own page
-import { addToCart, setItem } from '../pages/cart/cart.js'
+import { addToCart } from '../pages/cart/cart.js'
 // Load and/or create new Page with single product within
 const query = window.location.search
 const parameters = new URLSearchParams(query)
@@ -34,12 +34,11 @@ const createSingleProduct = async function () {
     maximumFractionDigits: 2
   })
   const cameraLenses = cameras.lenses
-  const quantity = 1
-  singleProduct(cameras, cameraName, cameraDescription, cameraImage, beautyPrice, cameraLenses, quantity)
+  singleProduct(cameras, cameraName, cameraDescription, cameraImage, beautyPrice, cameraLenses)
 }
 createSingleProduct()
 
-function singleProduct (cameras, cameraName, cameraDescription, cameraImage, beautyPrice, cameraLenses, quantity) {
+function singleProduct (cameras, cameraName, cameraDescription, cameraImage, beautyPrice, cameraLenses) {
   // Dynamic page title - gives Product Name as page title
   document.title = cameraName + ' - ' + cameraDescription
   // Dynamic breadcrumb - shows Product Name as navigation point (breadcrumb)
@@ -90,12 +89,14 @@ function singleProduct (cameras, cameraName, cameraDescription, cameraImage, bea
   lensSelectorButtonDefault.setAttribute('selected', '')
   lensSelectorButtonDefault.textContent = 'Select'
   lensSelectorGroup.appendChild(lensSelectorButtonDefault)
+
   // Creating an option for each of the lenses
   cameraLenses.forEach(function (lens) {
     const lensSelectorButton = document.createElement('option')
     const lensId = lens[0] + lens[1]
     lensSelectorButton.setAttribute('class', 'bg-primary text-secondary')
     lensSelectorButton.textContent = lens
+    lensSelectorButton.setAttribute('id', lensId)
     lensSelectorButton.setAttribute('value', cameraId + '(' + lensId + ')')
     lensSelectorGroup.appendChild(lensSelectorButton)
     lensSelectorGroup.addEventListener('change', (event) => {
@@ -106,18 +107,6 @@ function singleProduct (cameras, cameraName, cameraDescription, cameraImage, bea
   // Add to Cart button with Price inside after Selecting a lens
   // Also Item count - product amount added to cart
   const addToCartButton = document.createElement('button')
-  // Counting the number of items added to the cart
-  function numberOfItemsAdded () {
-    let itemNumbers = localStorage.getItem('allQuantity')
-    itemNumbers = parseInt(itemNumbers)
-    if (itemNumbers) {
-      localStorage.setItem('allQuantity', itemNumbers + 1)
-      document.querySelector('#cart span').textContent = itemNumbers + 1
-    } else {
-      localStorage.setItem('allQuantity', 1)
-      document.querySelector('#cart span').textContent = 1
-    }
-  }
   // Adding the chosen Product + variation to the cart and
   // showing it on the Cart icon - top of the page
   addToCartButton.addEventListener('click', () => {
@@ -125,22 +114,12 @@ function singleProduct (cameras, cameraName, cameraDescription, cameraImage, bea
     if (lensValue === 'Select') {
       window.alert('Please select a lens to continue with your order!')
     } else {
-      numberOfItemsAdded()
       addToCart({
         _id: cameraId,
         name: cameraName,
         image: cameraImage,
         price: cameras.price,
-        lens: lensValue,
-        quantity: quantity
-      })
-      setItem({
-        _id: cameraId,
-        name: cameraName,
-        image: cameraImage,
-        price: cameras.price,
-        lens: lensValue,
-        quantity: quantity
+        lens: lensValue
       })
     }
   })
@@ -164,4 +143,20 @@ function singleProduct (cameras, cameraName, cameraDescription, cameraImage, bea
 
   // Single Product Page containing
   newSingleProduct.appendChild(newSingleProductBody)
+
+  // If we are being redirected from Cart page to a specified Product page with pre-selected Lens variation
+  // then show the user the previously selected product with the selected lens option
+
+  // 1. Lets split up the URL we using to redirect the user to the product page
+  const qs = window.location.search.substr(1).split('&').reduce(function (prev, cur) {
+    const split = cur.split('=')
+    prev[split[0]] = decodeURIComponent(split[1])
+    return prev
+  }, {})
+  // 2. Then ONLY then we show pre-selection when the URL contains '&value='
+  if (window.location.href.indexOf('&value=') !== -1) {
+    $('#selector').val(qs.value)
+    $('#add-to-cart').text(beautyPrice)
+    // console.log(qs.value)
+  }
 }

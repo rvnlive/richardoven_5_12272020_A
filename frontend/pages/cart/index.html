@@ -47,29 +47,104 @@
         <span class="sr-only">Loading...</span>
       </div>
       <div class="row w-100 mt-5">
-        <span class="col ml-2">Product Image</span>
-        <span class="col ml-3 pl-5">Product Details</span>
-        <span class="col ml-5 pl-4">Quantity</span>
+        <span class="col ml-4 pl-4">Product Image</span>
+        <span class="col ml-4 pl-3">Product Details</span>
+        <span class="col ml-5 pl-5">Quantity</span>
         <span class="col mr-5 pr-4">Price</span>
         <span class="col-0"></span>
       </div>
-      <section id="cart-items" class="d-flex flex-wrap justify-content-center mb-md-5 pt-3">
+      <section id="cart-items" class="d-flex flex-wrap justify-content-center mb-2 pt-3">
       <!-- Here comes the JavaScript creation -->
       </section>
-      <div class="row w-100">
-        <div class="col">
-          <button id="checkout" class="btn btn-success ml-2 float-right">Checkout</button>
-        <button class="btn btn-secondary float-right ml-4" href="../../index.html">Back to Products</button>
-        <button id="remove-all-items" class="btn btn-warning float-right">Remove all items</button>
+      <div class="row w-100 mb-5">
+        <div class="col ml-3">
+          <button class="btn btn-secondary" href="../../index.html">Back to Products</button>
+          <button id="remove-all-items" class="btn btn-warning float-right">Remove all items</button>
+        </div>
+      </div>
+      <div class="row justify-content-center mt-2 pb-5 mb-5">
+        <form class="flex-column p-3 pb-5 rounded shadow align-content-center bg-primary">
+          <h2 class="row justify-content-center mb-4 text-black text-uppercase">Customer Details</h2>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="customer-firstname">First Name*</label>
+              <input type="text" class="form-control" id="customer-firstname" placeholder="First name" required>
+            </div>
+            <div class="form-group col-md-6">
+            <label for="customer-lastname">Last Name*</label>
+              <input type="text" class="form-control" id="customer-lastname" placeholder="Last name" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="customer-email">E-mail*</label>
+            <input type="email" class="form-control" id="customer-email" placeholder="E-mail" required>
+          </div>
+          <div class="form-group">
+            <label for="customer-address">Address*</label>
+            <input type="text" class="form-control" id="customer-address" placeholder="1234 Main St" required>
+          </div>
+          <div class="form-group">
+            <label for="customer-address2">Address 2</label>
+            <input type="text" class="form-control" id="customer-address2" placeholder="Apartment, studio, or floor">
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-5">
+              <label for="customer-town">Town/City*</label>
+              <input type="text" class="form-control" id="customer-town" required>
+            </div>
+            <div class="form-group col-md-3">
+              <label for="customer-county">County/State</label>
+              <select id="customer-county" class="form-control">
+                <option selected>Choose...</option>
+                <option>...</option>
+              </select>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="inputZip">Postcode*</label>
+              <input type="text" class="form-control" id="customer-postcode" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="billing-check">
+              <label class="form-check-label" for="billing-check">
+                Is it billing address?
+              </label>
+            </div>
+            <p class="float-left mt-md-3 font-italic">* Details are required</p>
+          </div>
+
+        </form>
+        <div class="col-auto h-25 ml-md-2 p-4 bg-primary rounded shadow-lg">
+        <table class="table table-hover table-responsive">
+          <thead>
+            <tr>
+              <th class="col-auto text-black font-italic text-uppercase">Order Total</th>
+            </tr>
+            <tr>
+              <th>Qty</th>
+              <th>Price (ex.T)</th>
+              <th>Tax</th>
+              <th>Price (in.T)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>285</td>
+              <td>5%</td>
+              <td>300!</td>
+            </tr>
+          </tbody>
+        </table>
+        <button id="checkout" type="submit" class="btn btn-block btn-secondary">Checkout</button>
       </div>
       </div>
-      
     </div>
 
 
-    
     <!--Footer-->
-    <footer class="bg-primary rounded fixed-bottom">
+    <footer class="bg-primary rounded fixed-bottom mt-5">
 			<div class="container">
 			  <div class="row">
 				<nav class="col navbar navbar-expand">

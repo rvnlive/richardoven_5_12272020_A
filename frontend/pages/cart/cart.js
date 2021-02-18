@@ -1,73 +1,38 @@
 // Load, Modify or Clear the Cart
-const cart = []
-const newProduct = {}
-const localCart = window.localStorage.getItem('Cart')
+/// /////////////////////////////
+let cart = []
 
-// Only show the Cart page if there is an item within the cart
-// otherwise send customer back onto the Products page
-function loadCart () {
-  if (window.location.href.indexOf('/cart/index.html') !== -1 && window.localStorage.getItem('Cart') === null) {
-    window.alert('Your cart is empty. Select an item and add it to you cart.')
-    document.location = '../../index.html'
-  }
-}
-loadCart()
-// Check for the number of items added to the cart
-// and show it on the NavBar Cart icon
-function onLoadItemNumber () {
-  const itemNumbers = window.localStorage.getItem('allQuantity')
-  if (itemNumbers) {
-    document.querySelector('#cart span').textContent = itemNumbers
-  }
-}
-onLoadItemNumber()
-
-// Lets create the Cart page and load the items from localStorage
-// Add First item to cart
-export function addToCart (product) {
-  const existingProduct = cart.find((product) => {
-    return cart.lens === product.lensValue
-  })
-  if ((localCart === null) || (localCart !== null)) {
-    if (existingProduct) {
-      existingProduct.quantity++
-    } else {
-      cart.push(product)
-    }
-  }
-  saveCart()
-  console.log(product)
-}
-
-// Save cart to local Storage
+// Save Cart
 function saveCart () {
   window.localStorage.setItem('Cart', JSON.stringify(cart))
 }
-
-export function setItem (product) {
-  const newProduct = cart.find((product) => {
-    return cart.lens !== product.lensValue
-  })
-  if (localCart !== null) {
-    let cart = localCart
-    cart = JSON.parse(cart)
-    cart.push(product)
-    saveCart()
-  }
+// Add item to cart
+export function addToCart (product) {
+  cart.push(product)
+  saveCart()
+  document.location.reload()
+  // console.log(cart)
 }
-// Keep Cart and Reuse Cart after page load
-// if (localCart) {
-//   cart = JSON.parse(localCart)
-// } else {
-//   cart = []
-// }
-// window.localStorage.setItem('Cart', JSON.stringify(localCart))
-// const data = JSON.parse(window.localStorage.getItem('Cart'))
-
-function removeSingleItem () {
-
+// Load existing Cart on Page load
+function loadCart () {
+  cart = JSON.parse(window.localStorage.getItem('Cart'))
 }
-// removeSingleItem()
+if (window.localStorage.getItem('Cart') != null) {
+  loadCart()
+}
+
+// Check for the number of items added to the cart
+// and show it on the NavBar Cart icon
+const itemNumbers = cart.length
+if (itemNumbers) {
+  document.querySelector('#cart span').textContent = itemNumbers
+}
+// Only show the Cart page if there is an item within the cart
+// otherwise send customer back onto the Products page
+if (window.location.href.indexOf('/cart/index.html') !== -1 && window.localStorage.getItem('Cart') === null) {
+  window.alert('Your cart is empty. Select an item and add it to you cart.')
+  document.location = '../../index.html'
+}
 
 // Clear the cart completely
 const removeAllItemsButton = document.getElementById('remove-all-items')
@@ -83,16 +48,31 @@ function removeAllItemsFromCart () {
 removeAllItemsFromCart()
 
 if (window.location.href.indexOf('/cart/index.html') !== -1) {
+  const groupByLensValue = cart.reduce((product, value) => {
+    product[value.lens] = product[value.lens] + 1 || 1
+    return product
+  }, {})
+  // console.log(groupByLensValue)
+
   function listCartItems () {
-    let cartItems = localCart
+    let cartItems = window.localStorage.getItem('Cart')
     cartItems = JSON.parse(cartItems)
     if (cartItems) {
       document.getElementById('loading-spinner').style.display = 'none'
+      document.getElementById('cart').style.display = 'none'
+    }
+    // Products are being duplicated in our Cart array,
+    // so lets get rid of the duplicates on our Cart Listing page
+    const reducedCartItems = cartItems.reduce((x, y) => x.findIndex(product => product.lens === y.lens) < 0 ? [...x, y] : x, [])
+
+    // Remove a single item (even if its added multiple times) from our Cart array
+    function removeSingleItemFunction () {
+      cartItems.filter((v, i, a) => a.findIndex(product => (product.lensValue === v.lensValue)) === i)
     }
     // Section to merge all product rows
     const cartItemsSection = document.getElementById('cart-items')
-    // Lets list all items from Local Storage
-    cartItems.forEach((product, index) => {
+    // Lets list all items from the previously Reduced Local Storage Cart
+    reducedCartItems.forEach((product, index) => {
       const cameraId = product._id
       const cameraName = product.name
       const cameraImage = product.image
@@ -103,8 +83,11 @@ if (window.location.href.indexOf('/cart/index.html') !== -1) {
         minimumFractionDigits: 0,
         maximumFractionDigits: 2
       })
-      const quantity = product.quantity
       const lensValue = product.lens
+      // console.log(lensValue.length)
+      const quantity = groupByLensValue[lensValue]
+      // console.log(totalCartQuantity)
+
       const totalItemPrice = quantity * cameraPrice
       const beautyItemPrice = totalItemPrice.toLocaleString('en-US', {
         style: 'currency',
@@ -133,7 +116,7 @@ if (window.location.href.indexOf('/cart/index.html') !== -1) {
       // Product Image
       const listedProductImage = document.createElement('img')
       listedProductImage.setAttribute('id', 'product-image')
-      listedProductImage.setAttribute('class', 'img-thumbnail w-50 mt-2 mb-2 w-25')
+      listedProductImage.setAttribute('class', 'img-thumbnail w-75 mt-2 mb-2')
       listedProductImage.setAttribute('alt', 'Image of an old ' + cameraName)
       listedProductImage.src = cameraImage
       // Merge Image with Column
@@ -147,10 +130,10 @@ if (window.location.href.indexOf('/cart/index.html') !== -1) {
       // Merge Name and Variation ID Column with Row
       cartItemsRow.appendChild(listedProductDetailsCol)
       // Product Name
-      const listedProductName = document.createElement('h5')
+      const listedProductName = document.createElement('h6')
       listedProductName.setAttribute('id', 'product-name')
-      listedProductName.setAttribute('class', 'text-center')
-      listedProductName.textContent = cameraName
+      listedProductName.setAttribute('class', 'text-center font-weight-bold text-uppercase')
+      listedProductName.textContent = cameraName + ' with ' + lensValue[25] + lensValue[26] + 'mm lenses'
       // Merge Name with Name and Variation ID Column
       listedProductDetailsCol.appendChild(listedProductName)
       // Product Variation ID
@@ -163,7 +146,7 @@ if (window.location.href.indexOf('/cart/index.html') !== -1) {
       listedProductVariation.setAttribute('class', 'text-center font-italic')
       listedProductVariation.textContent = lensValue
       listedProductVariation.addEventListener('click', (event) => {
-        document.location.href = '../../pages/product.html?id=' + cameraId
+        window.location.href = '../../pages/product.html?id=' + cameraId + '&value=' + lensValue
       })
       // Merge Variation with Name and Variation ID Column
       listedProductDetailsCol.appendChild(listedProductVariation)
@@ -195,9 +178,9 @@ if (window.location.href.indexOf('/cart/index.html') !== -1) {
       listedProductPrice.setAttribute('class', 'btn btn-md rounded btn-info float-right')
       listedProductPrice.setAttribute('data-toggle', 'popover')
       listedProductPrice.setAttribute('data-trigger', 'focus')
-      listedProductPrice.setAttribute('tabindex', '0')
+      listedProductPrice.setAttribute('tabIndex', '0')
       listedProductPrice.setAttribute('title', 'Price calculated:')
-      listedProductPrice.setAttribute('data-content', 'Quantity *' + ` ${beautyCameraPrice}`)
+      listedProductPrice.setAttribute('data-content', 'Quantity: ' + '(' + quantity + ')' + ` * ${beautyCameraPrice}`)
       listedProductPrice.textContent = beautyItemPrice
       // Bootstrap Function for Popover
       $(function () {
@@ -213,7 +196,9 @@ if (window.location.href.indexOf('/cart/index.html') !== -1) {
       const removeSingleItem = document.createElement('button')
       removeSingleItem.setAttribute('id', 'remove-single-item')
       removeSingleItem.setAttribute('class', 'btn btn-danger float-right mr-4')
-      removeSingleItem.setAttribute('onclick', 'removeSingleItem()')
+      // Remove a single item of the cart
+      // removeSingleItem.addEventListener('click', removeSingleItemFunction)
+
       removeSingleItem.textContent = 'Remove item'
       // Merge Remove Single Item button with Remove Single Item Column
       removeSingleItemCol.appendChild(removeSingleItem)
