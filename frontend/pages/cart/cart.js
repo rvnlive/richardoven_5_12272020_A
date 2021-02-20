@@ -55,7 +55,7 @@ if ((window.location.href.indexOf('/cart/index.html') !== -1) && (window.localSt
 
     // Section to merge all product rows
     const cartItemsSection = document.getElementById('cart-items')
-    // Lets list all items from the previously Reduced Local Storage Cart
+    // Lets list all items from the Local Storage Cart
     cartItems.forEach((product, index) => {
       const cameraId = product._id
       const cameraName = product.name
@@ -74,7 +74,7 @@ if ((window.location.href.indexOf('/cart/index.html') !== -1) && (window.localSt
       cartItemsRow.setAttribute('class', 'd-flex w-50 align-items-center border rounded shadow-lg mb-2')
       cartItemsSection.appendChild(cartItemsRow)
 
-      // How the ROW made: Image, Details(Name), Total Price(Quantity*Price), Remove Item
+      // How the ROW made: Image, Details(Name), Total Price, Remove Item
       // Image Column
       const listedProductImageCol = document.createElement('div')
       listedProductImageCol.setAttribute('class', 'col')
@@ -93,14 +93,14 @@ if ((window.location.href.indexOf('/cart/index.html') !== -1) && (window.localSt
       // Name Column
       const listedProductDetailsCol = document.createElement('div')
       listedProductDetailsCol.setAttribute('class', 'col mt-3')
-      // Merge Name and Variation ID Column with Row
+      // Merge Name Column with Row
       cartItemsRow.appendChild(listedProductDetailsCol)
       // Product Name
       const listedProductName = document.createElement('h6')
       listedProductName.setAttribute('id', 'product-name')
       listedProductName.setAttribute('class', 'text-center font-weight-bold text-uppercase')
       listedProductName.textContent = cameraName
-      // Merge Name with Name and Variation ID Column
+      // Merge Name with Name Column
       listedProductDetailsCol.appendChild(listedProductName)
 
       // Product Price Column
@@ -108,7 +108,7 @@ if ((window.location.href.indexOf('/cart/index.html') !== -1) && (window.localSt
       listedProductPriceCol.setAttribute('class', 'col mt-2')
       // Merge Product Price Column with Row
       cartItemsRow.appendChild(listedProductPriceCol)
-      // Product Price (Sum of Single Product - Quantity * Price)
+      // Product Price
       const listedProductPrice = document.createElement('h5')
       listedProductPrice.setAttribute('id', 'product-price')
       listedProductPrice.setAttribute('class', 'btn btn-md rounded btn-info float-right')
@@ -152,16 +152,16 @@ if ((window.location.href.indexOf('/cart/index.html') !== -1) && (window.localSt
 
     /// ////////////////////////////////////////////////////////////////
     // Lets Create the Customer Details Form requirements for validation
-    // Load form elements
-    const customerFirstName = document.getElementById('customer-firstname')
-    const customerLastName = document.getElementById('customer-lastname')
-    const customerEmail = document.getElementById('customer-email')
-    const customerAddress = document.getElementById('customer-address')
-    const customerAddress2 = document.getElementById('customer-address2')
-    const customerTown = document.getElementById('customer-town')
-    const customerPostcode = document.getElementById('customer-postcode')
-
     const validateCustomerInput = () => {
+      // Load form elements
+      const customerFirstName = document.getElementById('customer-firstname')
+      const customerLastName = document.getElementById('customer-lastname')
+      const customerEmail = document.getElementById('customer-email')
+      const customerAddress = document.getElementById('customer-address')
+      const customerAddress2 = document.getElementById('customer-address2')
+      const customerTown = document.getElementById('customer-town')
+      const customerPostcode = document.getElementById('customer-postcode')
+
       // Specifying validation criteria
       const isNotEmpty = value => value !== ''
       const isLongEnough = value => value.length >= 3
@@ -250,7 +250,7 @@ if ((window.location.href.indexOf('/cart/index.html') !== -1) && (window.localSt
         if (validatedForm !== false) {
           const response = await postData('POST', 'http://localhost:3000/api/cameras/order', orderInformation)
           window.localStorage.setItem('orderId', response.orderId)
-          window.localStorage.setItem('orderInformation', JSON.stringify(orderInformation))
+          window.localStorage.setItem('orderInformation', JSON.stringify(orderInformation.contact))
           window.setTimeout(function () { window.location = `../confirmation.html?orderId=${response.orderId}` }, 1000)
         }
       } else {
