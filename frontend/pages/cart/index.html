@@ -42,80 +42,73 @@
 
     <!--Loading spinner and Product section-->
     <div class="container">
-      <h1 class="jumbotron jumbotron-fluid bg-primary text-black text-shadow rounded-bottom shadow-lg text-center text-uppercase">Items in your cart</h1>
       <div id="loading-spinner" class="spinner-grow text-primary w-100" role="status">
         <span class="sr-only">Loading...</span>
       </div>
-      <div class="row w-100 mt-5">
-        <span class="col ml-4 pl-4">Product Image</span>
-        <span class="col ml-4 pl-3">Product Details</span>
-        <span class="col ml-5 pl-5">Quantity</span>
-        <span class="col mr-5 pr-4">Price</span>
-        <span class="col-0"></span>
-      </div>
-      <section id="cart-items" class="d-flex flex-wrap justify-content-center mb-2 pt-3">
+      <section id="cart-items" class="d-flex flex-column flex-wrap align-content-center flex-shrink-1 mb-2 pt-3">
       <!-- Here comes the JavaScript creation -->
       </section>
-      <div class="row w-100 mb-5">
-        <div class="col ml-3">
-          <button class="btn btn-secondary" href="../../index.html">Back to Products</button>
-          <button id="remove-all-items" class="btn btn-warning float-right">Remove all items</button>
-        </div>
-      </div>
-      <div class="row justify-content-center mt-2 pb-5 mb-5">
-        <form class="flex-column p-3 pb-5 rounded shadow align-content-center bg-primary">
+      <div class="row flex-row justify-content-center mt-2 pb-5 mb-5" id="details-form">
+        <form class="flex-column p-3 pb-5 rounded shadow align-content-center bg-primary needs-validation">
           <h2 class="row justify-content-center mb-4 text-black text-uppercase">Customer Details</h2>
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="customer-firstname">First Name*</label>
-              <input type="text" class="form-control" id="customer-firstname" placeholder="First name" required>
+              <input type="text" name="input" class="form-control" id="customer-firstname" placeholder="First name" required>
+              <div class="invalid-feedback" id="invalid-firstname">
+              </div>
             </div>
             <div class="form-group col-md-6">
             <label for="customer-lastname">Last Name*</label>
-              <input type="text" class="form-control" id="customer-lastname" placeholder="Last name" required>
+              <input type="text" name="input" class="form-control" id="customer-lastname" placeholder="Last name" required>
+              <div class="invalid-feedback" id="invalid-lastname">
+              </div>
             </div>
           </div>
           <div class="form-group">
             <label for="customer-email">E-mail*</label>
-            <input type="email" class="form-control" id="customer-email" placeholder="E-mail" required>
+            <input type="email" name="input" class="form-control" id="customer-email" placeholder="E-mail" required>
+            <div class="invalid-feedback" id="invalid-email">
+            </div>
           </div>
           <div class="form-group">
             <label for="customer-address">Address*</label>
-            <input type="text" class="form-control" id="customer-address" placeholder="1234 Main St" required>
+            <input type="text" name="input" class="form-control" id="customer-address" placeholder="1234 Main St" required>
+            <div class="invalid-feedback" id="invalid-address">
+            </div>
           </div>
           <div class="form-group">
             <label for="customer-address2">Address 2</label>
-            <input type="text" class="form-control" id="customer-address2" placeholder="Apartment, studio, or floor">
+            <input type="text" name="input" class="form-control" id="customer-address2" placeholder="Optional">
+            <div class="invalid-feedback" id="invalid-address2">
+            </div>
           </div>
           <div class="form-row">
-            <div class="form-group col-md-5">
+            <div class="col-md-5">
               <label for="customer-town">Town/City*</label>
-              <input type="text" class="form-control" id="customer-town" required>
+              <input type="text" name="input" class="form-control" id="customer-town" placeholder="New York" required>
+              <div class="invalid-feedback" id="invalid-town">
+              </div>
             </div>
             <div class="form-group col-md-3">
               <label for="customer-county">County/State</label>
-              <select id="customer-county" class="form-control">
+              <select id="customer-county" class="form-control" disabled>
                 <option selected>Choose...</option>
                 <option>...</option>
               </select>
             </div>
-            <div class="form-group col-md-4">
-              <label for="inputZip">Postcode*</label>
-              <input type="text" class="form-control" id="customer-postcode" required>
+            <div class="col-md-4">
+              <label for="customer-postcode">Postcode*</label>
+              <input type="text" name="input" class="form-control" id="customer-postcode" placeholder="10001" required>
+              <div class="invalid-feedback" id="invalid-postcode">
+              </div>
             </div>
           </div>
           <div class="form-group">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="billing-check">
-              <label class="form-check-label" for="billing-check">
-                Is it billing address?
-              </label>
-            </div>
             <p class="float-left mt-md-3 font-italic">* Details are required</p>
           </div>
-
         </form>
-        <div class="col-auto h-25 ml-md-2 p-4 bg-primary rounded shadow-lg">
+        <form class="col-auto h-25 ml-md-2 mt-md-3 mt-xl-0 p-4 bg-primary rounded shadow-lg" id="order-table">
         <table class="table table-hover table-responsive">
           <thead>
             <tr>
@@ -130,15 +123,15 @@
           </thead>
           <tbody>
             <tr>
-              <th scope="row">1</th>
-              <td>285</td>
+              <th scope="row" id="final-quantity">1</th>
+              <td id="total-price">285</td>
               <td>5%</td>
-              <td>300!</td>
+              <td id="taxed-total">300!</td>
             </tr>
           </tbody>
         </table>
         <button id="checkout" type="submit" class="btn btn-block btn-secondary">Checkout</button>
-      </div>
+      </form>
       </div>
     </div>
 
@@ -159,9 +152,9 @@
     </footer>
     
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
         <!--JavaScript stored locally-->
         <script src="cart.js" type="module"></script>
 </body>

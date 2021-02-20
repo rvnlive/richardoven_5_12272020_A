@@ -47,7 +47,7 @@ function singleProduct (cameras, cameraName, cameraDescription, cameraImage, bea
   // Lets fill the 'Single Product' container
   const newSingleProduct = document.getElementById('single-product')
   const newSingleProductBody = document.createElement('div')
-  newSingleProductBody.setAttribute('class', 'd-flex flex-wrap w-75 shadow rounded bg-primary')
+  newSingleProductBody.setAttribute('class', 'd-flex flex-column flex-lg-row w-75 align-items-center shadow rounded bg-primary pb-2')
   // Creating a Left and Right side column
   // Left
   const newSingleProductColumnLeft = document.createElement('div')
@@ -61,7 +61,7 @@ function singleProduct (cameras, cameraName, cameraDescription, cameraImage, bea
 
   // Right
   const newSingleProductColumnRight = document.createElement('div')
-  newSingleProductColumnRight.setAttribute('class', 'flex-column w-50 pl-lg-3 pr-lg-3 rounded-right align-content-center mt-3 mt-md-4 mt-lg-5 bg-primary')
+  newSingleProductColumnRight.setAttribute('class', 'flex-column w-50 pl-lg-3 pr-lg-3 rounded-right align-content-center mt-2 mt-md-5 mt-lg-0 bg-primary')
   // Fetch Single Product Name and add to page
   const newSingleProductName = document.createElement('h4')
   newSingleProductName.setAttribute('id', 'product-name')
@@ -118,8 +118,7 @@ function singleProduct (cameras, cameraName, cameraDescription, cameraImage, bea
         _id: cameraId,
         name: cameraName,
         image: cameraImage,
-        price: cameras.price,
-        lens: lensValue
+        price: cameras.price
       })
     }
   })
@@ -143,20 +142,4 @@ function singleProduct (cameras, cameraName, cameraDescription, cameraImage, bea
 
   // Single Product Page containing
   newSingleProduct.appendChild(newSingleProductBody)
-
-  // If we are being redirected from Cart page to a specified Product page with pre-selected Lens variation
-  // then show the user the previously selected product with the selected lens option
-
-  // 1. Lets split up the URL we using to redirect the user to the product page
-  const qs = window.location.search.substr(1).split('&').reduce(function (prev, cur) {
-    const split = cur.split('=')
-    prev[split[0]] = decodeURIComponent(split[1])
-    return prev
-  }, {})
-  // 2. Then ONLY then we show pre-selection when the URL contains '&value='
-  if (window.location.href.indexOf('&value=') !== -1) {
-    $('#selector').val(qs.value)
-    $('#add-to-cart').text(beautyPrice)
-    // console.log(qs.value)
-  }
 }

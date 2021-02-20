@@ -27,76 +27,41 @@ const itemNumbers = cart.length
 if (itemNumbers) {
   document.querySelector('#cart span').textContent = itemNumbers
 }
-// Only show the Cart page if there is an item within the cart
-// otherwise send customer back onto the Products page
-if (window.location.href.indexOf('/cart/index.html') !== -1 && window.localStorage.getItem('Cart') === null) {
-  window.alert('Your cart is empty. Select an item and add it to you cart.')
-  document.location = '../../index.html'
+
+const orderInformation = {
+  contact: {},
+  products: []
 }
 
-// Clear the cart completely
-const removeAllItemsButton = document.getElementById('remove-all-items')
-function removeAllItemsFromCart () {
-  if (window.location.href.indexOf('/cart/index.html') !== -1) {
-    removeAllItemsButton.addEventListener('click', (event) => {
-      window.localStorage.clear()
-      window.alert('You successfully emptied your cart. Please select an item and add it to your cart.')
-      document.location = '../../index.html'
-    })
-  }
-}
-removeAllItemsFromCart()
-
-if (window.location.href.indexOf('/cart/index.html') !== -1) {
-  const groupByLensValue = cart.reduce((product, value) => {
-    product[value.lens] = product[value.lens] + 1 || 1
-    return product
-  }, {})
-  // console.log(groupByLensValue)
-
+if ((window.location.href.indexOf('/cart/index.html') !== -1) && (window.localStorage.getItem('Cart') === null)) {
+  document.getElementById('details-form').style.display = 'none'
+  document.getElementById('order-table').style.display = 'none'
+} else if ((window.location.href.indexOf('/cart/index.html') !== -1) && (window.localStorage.getItem('Cart') !== null)) {
   function listCartItems () {
     let cartItems = window.localStorage.getItem('Cart')
     cartItems = JSON.parse(cartItems)
     if (cartItems) {
       document.getElementById('loading-spinner').style.display = 'none'
-      document.getElementById('cart').style.display = 'none'
     }
-    // Products are being duplicated in our Cart array,
-    // so lets get rid of the duplicates on our Cart Listing page
-    const reducedCartItems = cartItems.reduce((x, y) => x.findIndex(product => product.lens === y.lens) < 0 ? [...x, y] : x, [])
 
-    // Remove a single item (even if its added multiple times) from our Cart array
-    function removeSingleItemFunction () {
-      cartItems.filter((v, i, a) => a.findIndex(product => (product.lensValue === v.lensValue)) === i)
+    // Function for Total Cart Price
+    function sum (cart) {
+      let sum = 0
+      for (let i = 0; i < cart.length; i++) { sum += cart[i].price }
+      return sum
     }
+    const totalCartPrice = sum(cartItems)
+    // console.log(totalPrice)
+
     // Section to merge all product rows
     const cartItemsSection = document.getElementById('cart-items')
     // Lets list all items from the previously Reduced Local Storage Cart
-    reducedCartItems.forEach((product, index) => {
+    cartItems.forEach((product, index) => {
       const cameraId = product._id
       const cameraName = product.name
       const cameraImage = product.image
       const cameraPrice = product.price
-      const beautyCameraPrice = cameraPrice.toLocaleString('en-US', {
-        style: 'currency',
-        currency: 'USD',
-        minimumFractionDigits: 0,
-        maximumFractionDigits: 2
-      })
-      const lensValue = product.lens
-      // console.log(lensValue.length)
-      const quantity = groupByLensValue[lensValue]
-      // console.log(totalCartQuantity)
-
-      const totalItemPrice = quantity * cameraPrice
-      const beautyItemPrice = totalItemPrice.toLocaleString('en-US', {
-        style: 'currency',
-        currency: 'USD',
-        minimumFractionDigits: 0,
-        maximumFractionDigits: 2
-      })
-      const totalPrice = quantity * (quantity * cameraPrice)
-      const beautyTotalPrice = totalItemPrice.toLocaleString('en-US', {
+      const beautyItemPrice = cameraPrice.toLocaleString('en-US', {
         style: 'currency',
         currency: 'USD',
         minimumFractionDigits: 0,
@@ -106,17 +71,18 @@ if (window.location.href.indexOf('/cart/index.html') !== -1) {
       // First create a row for each of the Cart Items
       const cartItemsRow = document.createElement('div')
       cartItemsRow.setAttribute('id', 'product-row')
-      cartItemsRow.setAttribute('class', 'row w-100 align-items-center border rounded shadow-lg mb-2')
+      cartItemsRow.setAttribute('class', 'd-flex w-50 align-items-center border rounded shadow-lg mb-2')
       cartItemsSection.appendChild(cartItemsRow)
 
-      // How the ROW made: Image, Details(Name, VariationID), Quantity, Total Price(Quantity*Price), Remove Item
+      // How the ROW made: Image, Details(Name), Total Price(Quantity*Price), Remove Item
       // Image Column
       const listedProductImageCol = document.createElement('div')
       listedProductImageCol.setAttribute('class', 'col')
       // Product Image
       const listedProductImage = document.createElement('img')
       listedProductImage.setAttribute('id', 'product-image')
-      listedProductImage.setAttribute('class', 'img-thumbnail w-75 mt-2 mb-2')
+      listedProductImage.setAttribute('class', 'img-thumbnail mt-2 mb-2')
+      listedProductImage.setAttribute('width', '50%', 'height', '50%')
       listedProductImage.setAttribute('alt', 'Image of an old ' + cameraName)
       listedProductImage.src = cameraImage
       // Merge Image with Column
@@ -124,7 +90,7 @@ if (window.location.href.indexOf('/cart/index.html') !== -1) {
       // Merge Image Column with Row
       cartItemsRow.appendChild(listedProductImageCol)
 
-      // Name and Variation ID Column
+      // Name Column
       const listedProductDetailsCol = document.createElement('div')
       listedProductDetailsCol.setAttribute('class', 'col mt-3')
       // Merge Name and Variation ID Column with Row
@@ -133,39 +99,9 @@ if (window.location.href.indexOf('/cart/index.html') !== -1) {
       const listedProductName = document.createElement('h6')
       listedProductName.setAttribute('id', 'product-name')
       listedProductName.setAttribute('class', 'text-center font-weight-bold text-uppercase')
-      listedProductName.textContent = cameraName + ' with ' + lensValue[25] + lensValue[26] + 'mm lenses'
+      listedProductName.textContent = cameraName
       // Merge Name with Name and Variation ID Column
       listedProductDetailsCol.appendChild(listedProductName)
-      // Product Variation ID
-      const listedProductVariation = document.createElement('p')
-      listedProductVariation.setAttribute('id', 'product-variation')
-      listedProductVariation.setAttribute('data-toggle', 'tooltip')
-      listedProductVariation.setAttribute('data-placement', 'right')
-      listedProductVariation.setAttribute('title', 'Unique ID contains the ProductID and the lens size chosen (last 2 digits)')
-      listedProductVariation.setAttribute('data-toggle', 'tooltip')
-      listedProductVariation.setAttribute('class', 'text-center font-italic')
-      listedProductVariation.textContent = lensValue
-      listedProductVariation.addEventListener('click', (event) => {
-        window.location.href = '../../pages/product.html?id=' + cameraId + '&value=' + lensValue
-      })
-      // Merge Variation with Name and Variation ID Column
-      listedProductDetailsCol.appendChild(listedProductVariation)
-
-      // Product Quantity Column
-      const listedProductQuantityCol = document.createElement('div')
-      listedProductQuantityCol.setAttribute('class', 'col')
-      // Merge Name and Variation ID Column with Row
-      cartItemsRow.appendChild(listedProductQuantityCol)
-      // Product Quantity
-      const listedProductQuantity = document.createElement('input')
-      listedProductQuantity.setAttribute('id', 'product-quantity')
-      listedProductQuantity.setAttribute('type', 'number')
-      listedProductQuantity.setAttribute('min', '1')
-      listedProductQuantity.setAttribute('class', 'form-control align-middle text-center w-50 float-right')
-      listedProductQuantity.setAttribute('value', quantity)
-
-      // Merge Product Quantity with Product Quantity Column
-      listedProductQuantityCol.appendChild(listedProductQuantity)
 
       // Product Price Column
       const listedProductPriceCol = document.createElement('div')
@@ -176,35 +112,152 @@ if (window.location.href.indexOf('/cart/index.html') !== -1) {
       const listedProductPrice = document.createElement('h5')
       listedProductPrice.setAttribute('id', 'product-price')
       listedProductPrice.setAttribute('class', 'btn btn-md rounded btn-info float-right')
-      listedProductPrice.setAttribute('data-toggle', 'popover')
-      listedProductPrice.setAttribute('data-trigger', 'focus')
-      listedProductPrice.setAttribute('tabIndex', '0')
-      listedProductPrice.setAttribute('title', 'Price calculated:')
-      listedProductPrice.setAttribute('data-content', 'Quantity: ' + '(' + quantity + ')' + ` * ${beautyCameraPrice}`)
       listedProductPrice.textContent = beautyItemPrice
-      // Bootstrap Function for Popover
-      $(function () {
-        $('[data-toggle="popover"]').popover()
-      })
       // Merge Product Price with Product Price Column
       listedProductPriceCol.appendChild(listedProductPrice)
 
-      // Remove Single Item Column
-      const removeSingleItemCol = document.createElement('div')
-      removeSingleItemCol.setAttribute('class', 'col')
-      // Remove Single Item button
-      const removeSingleItem = document.createElement('button')
-      removeSingleItem.setAttribute('id', 'remove-single-item')
-      removeSingleItem.setAttribute('class', 'btn btn-danger float-right mr-4')
-      // Remove a single item of the cart
-      // removeSingleItem.addEventListener('click', removeSingleItemFunction)
-
-      removeSingleItem.textContent = 'Remove item'
-      // Merge Remove Single Item button with Remove Single Item Column
-      removeSingleItemCol.appendChild(removeSingleItem)
-      // Merge Product Price Column with Row
-      cartItemsRow.appendChild(removeSingleItemCol)
+      orderInformation.products.push(cameraId)
     })
+
+    /// /////////////////////////////////////////////////////////////
+    // Lets load the numbers into the Order Total
+    //
+    // Final Quantity
+    const finalQuantity = document.getElementById('final-quantity')
+    finalQuantity.textContent = cart.length + ' product(s)'
+    //
+    // Beautify Total Price - Currency Sign etc.
+    const beautyTotalPrice = totalCartPrice.toLocaleString('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 2
+    })
+    // Load into HTML Total Price excluding Tax
+    const totalPrice = document.getElementById('total-price')
+    totalPrice.textContent = beautyTotalPrice
+    //
+    // Tax the Total Price to get Final Price
+    const taxedTotal = totalCartPrice + ((totalCartPrice / 100) * 7.25)
+    // Beautify Taxed Total - Currency Sign etc.
+    const beautyTaxedTotal = taxedTotal.toLocaleString('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 2
+    })
+    // Load into HTML Price including Tax
+    const taxedTotalPrice = document.getElementById('taxed-total')
+    taxedTotalPrice.textContent = beautyTaxedTotal
+
+    /// ////////////////////////////////////////////////////////////////
+    // Lets Create the Customer Details Form requirements for validation
+    // Load form elements
+    const customerFirstName = document.getElementById('customer-firstname')
+    const customerLastName = document.getElementById('customer-lastname')
+    const customerEmail = document.getElementById('customer-email')
+    const customerAddress = document.getElementById('customer-address')
+    const customerAddress2 = document.getElementById('customer-address2')
+    const customerTown = document.getElementById('customer-town')
+    const customerPostcode = document.getElementById('customer-postcode')
+
+    const validateCustomerInput = () => {
+      // Specifying validation criteria
+      const isNotEmpty = value => value !== ''
+      const isLongEnough = value => value.length >= 3
+      const containNumber = /[0-9]/
+      const doNotContainNumber = value => !value.match(containNumber)
+      const specialCharacter = /[$£°&+,:;=?@#|'<>.^*()!"{}_]/
+      const doNotContainSpecialCharacter = value => !value.match(specialCharacter)
+      const regexEmail = /.+@.+\..+/
+      const isValidEmail = (value) => !!value.match(regexEmail)
+      const isValidInput = (value) => isNotEmpty(value) && isLongEnough(value) && doNotContainNumber(value) && doNotContainSpecialCharacter(value)
+
+      const firstName = customerFirstName.value
+      const lastName = customerLastName.value
+      const email = customerEmail.value
+      const address = customerAddress.value
+      const address2 = customerAddress2.value
+      const city = customerTown.value
+      const postcode = customerPostcode.value
+
+      // Validation Process
+      // First Name
+      if (isValidInput(firstName)) {
+        return firstName
+      } else {
+        customerFirstName.setAttribute('class', 'form-control alert-danger')
+      }
+      // Last Name
+      if (isValidInput(lastName)) {
+        return lastName
+      } else {
+        customerLastName.setAttribute('class', 'form-control alert-danger')
+      }
+      // Email
+      if (isValidEmail(email)) {
+        return email
+      } else {
+        customerEmail.setAttribute('class', 'form-control alert-danger')
+      }
+      // Address - Only for the first input
+      if (isNotEmpty(address) && isLongEnough(address)) {
+        return address
+      } else {
+        customerAddress.setAttribute('class', 'form-control alert-danger')
+      }
+      // Town/City
+      if (isValidInput(city)) {
+        return city
+      } else {
+        customerTown.setAttribute('class', 'form-control alert-danger')
+      }
+      // Postcode
+      if (isValidInput(postcode)) {
+        return postcode
+      } else {
+        customerPostcode.setAttribute('class', 'form-control alert-danger')
+      }
+    }
+
+    const contact = {
+      firstName: customerFirstName,
+      lastName: customerLastName,
+      email: customerEmail,
+      address: customerAddress,
+      address2: customerAddress2,
+      city: customerTown,
+      postcode: customerPostcode
+    }
+    orderInformation.contact = contact
+
+    const postData = async (method, url, orderInformation) => {
+      const response = await window.fetch(url, {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        method,
+        body: JSON.stringify(orderInformation)
+      })
+      return await response.json()
+    }
+
+    document.getElementById('checkout').addEventListener('click', async function (event) {
+      event.preventDefault()
+      if (validateCustomerInput()) {
+        document.getElementById('checkout').textContent = 'Submitting order'
+        const validatedForm = validateCustomerInput()
+        if (validatedForm !== false) {
+          const response = await postData('POST', 'http://localhost:3000/api/cameras/order', orderInformation)
+          window.localStorage.setItem('orderId', response.orderId)
+          window.localStorage.setItem('orderInformation', JSON.stringify(orderInformation))
+          window.setTimeout(function () { window.location = `../confirmation.html?orderId=${response.orderId}` }, 1000)
+        }
+      } else {
+        validateCustomerInput()
+      }
+    })
+    console.log(orderInformation)
   }
   listCartItems()
 }
