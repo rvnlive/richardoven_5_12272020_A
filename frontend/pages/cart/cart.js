@@ -149,19 +149,18 @@ if ((window.location.href.indexOf('/cart/index.html') !== -1) && (window.localSt
     // Load into HTML Price including Tax
     const taxedTotalPrice = document.getElementById('taxed-total')
     taxedTotalPrice.textContent = beautyTaxedTotal
-
     /// ////////////////////////////////////////////////////////////////
     // Lets Create the Customer Details Form requirements for validation
-    const validateCustomerInput = () => {
-      // Load form elements
-      const customerFirstName = document.getElementById('customer-firstname')
-      const customerLastName = document.getElementById('customer-lastname')
-      const customerEmail = document.getElementById('customer-email')
-      const customerAddress = document.getElementById('customer-address')
-      const customerAddress2 = document.getElementById('customer-address2')
-      const customerTown = document.getElementById('customer-town')
-      const customerPostcode = document.getElementById('customer-postcode')
+    // Load form elements
+    const customerFirstName = document.getElementById('customer-firstname')
+    const customerLastName = document.getElementById('customer-lastname')
+    const customerEmail = document.getElementById('customer-email')
+    const customerAddress = document.getElementById('customer-address')
+    const customerAddress2 = document.getElementById('customer-address2')
+    const customerTown = document.getElementById('customer-town')
+    const customerPostcode = document.getElementById('customer-postcode')
 
+    const validateCustomerInput = () => {
       // Specifying validation criteria
       const isNotEmpty = value => value !== ''
       const isLongEnough = value => value.length >= 3
