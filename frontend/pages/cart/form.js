@@ -1,4 +1,4 @@
-if ((window.location.href.indexOf('/cart/index.html') !== -1) && (window.sessionStorage.getItem('Cart') !== null)) {
+if ((window.location.href.indexOf('/cart/index.html') !== -1) && (window.localStorage.getItem('Cart') !== null)) {
 // Variables form
   const form = document.querySelector('form') // Binds the form section to the js
   const checkoutButton = document.getElementById('checkout')
@@ -9,13 +9,13 @@ if ((window.location.href.indexOf('/cart/index.html') !== -1) && (window.session
     products: []
   }
 
-  let cartItems = window.sessionStorage.getItem('Cart')
+  let cartItems = window.localStorage.getItem('Cart')
   cartItems = JSON.parse(cartItems)
   for (let i = 0; i < cartItems.length; i++) {
     const product = cartItems[i]
     orderInformation.products.push(product._id)
   }
-  const taxedTotal = window.sessionStorage.getItem('taxedTotal')
+  const taxedTotal = window.localStorage.getItem('taxedTotal')
   orderInformation.totalPrice.push(taxedTotal)
 
   const containNumber = /[0-9]/
@@ -125,7 +125,7 @@ if ((window.location.href.indexOf('/cart/index.html') !== -1) && (window.session
       const response = await postData('POST', 'http://localhost:3000/api/cameras/order', orderInformation)
       window.sessionStorage.setItem('orderId', response.orderId)
       window.sessionStorage.setItem('orderInfo', JSON.stringify(orderInformation))
-      window.sessionStorage.clear()
+      window.localStorage.clear()
       window.setTimeout(function () { window.location = `../confirmation.html?orderId=${response.orderId}` }, 1000)
     }
   })
