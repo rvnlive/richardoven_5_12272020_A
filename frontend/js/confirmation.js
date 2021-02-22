@@ -16,3 +16,11 @@ const totalTaxedPrice = orderInfo.totalPrice
 // console.log(totalTaxedPrice)
 const orderDetails = document.getElementById('order-details')
 orderDetails.textContent = 'You\'ve paid a total of ' + totalTaxedPrice + ' (incl. tax) for ' + totalQuantity + ' products.'
+
+// 'Fresh Start' button - clear all the Storages - Local and Session
+document.getElementById('fresh-start').addEventListener('click', () => {
+  window.localStorage.clear()
+  window.sessionStorage.clear()
+  window.alert('Local and Session Storage has been cleared. You\'ve got a Fresh Start!')
+  window.location.href = '../index.html'
+})
