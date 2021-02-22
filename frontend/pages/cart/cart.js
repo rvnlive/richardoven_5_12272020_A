@@ -4,7 +4,7 @@ let cart = []
 
 // Save Cart
 function saveCart () {
-  window.localStorage.setItem('Cart', JSON.stringify(cart))
+  window.sessionStorage.setItem('Cart', JSON.stringify(cart))
 }
 
 // Add item to cart
@@ -17,9 +17,9 @@ export function addToCart (product) {
 
 // Load existing Cart on Page load
 function loadCart () {
-  cart = JSON.parse(window.localStorage.getItem('Cart'))
+  cart = JSON.parse(window.sessionStorage.getItem('Cart'))
 }
-if (window.localStorage.getItem('Cart') != null) {
+if (window.sessionStorage.getItem('Cart') != null) {
   loadCart()
 }
 
@@ -31,18 +31,18 @@ if (itemNumbers) {
 }
 
 // The following code is only going to be loaded on the Cart page (/cart/index.html) if the cart IS empty
-if ((window.location.href.indexOf('/cart/index.html') !== -1) && (window.localStorage.getItem('Cart') === null)) {
+if ((window.location.href.indexOf('/cart/index.html') !== -1) && (window.sessionStorage.getItem('Cart') === null)) {
   document.getElementById('details-form').style.display = 'none'
   document.getElementById('order-table').style.display = 'none'
   // The following code is only going to be loaded on the Cart page (/cart/index.html) if the cart IS NOT empty
-} else if ((window.location.href.indexOf('/cart/index.html') !== -1) && (window.localStorage.getItem('Cart') !== null)) {
+} else if ((window.location.href.indexOf('/cart/index.html') !== -1) && (window.sessionStorage.getItem('Cart') !== null)) {
   // Remove All items from Cart
   document.getElementById('remove-all').addEventListener('click', () => {
-    window.localStorage.clear()
+    window.sessionStorage.clear()
     window.location.reload()
   })
   function listCartItems () {
-    let cartItems = window.localStorage.getItem('Cart')
+    let cartItems = window.sessionStorage.getItem('Cart')
     cartItems = JSON.parse(cartItems)
     if (cartItems) {
       document.getElementById('loading-spinner').style.display = 'none'
@@ -147,7 +147,7 @@ if ((window.location.href.indexOf('/cart/index.html') !== -1) && (window.localSt
       minimumFractionDigits: 0,
       maximumFractionDigits: 2
     })
-    window.localStorage.setItem('taxedTotal', beautyTaxedTotal)
+    window.sessionStorage.setItem('taxedTotal', beautyTaxedTotal)
     // Load into HTML the Price including Tax
     const taxedTotalPrice = document.getElementById('taxed-total')
     taxedTotalPrice.textContent = beautyTaxedTotal

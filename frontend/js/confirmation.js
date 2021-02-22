@@ -13,6 +13,6 @@ orderConfirmWithId.textContent = 'Order ID: ' + orderId
 // Brief details such as Total Product Quantity, Total Taxed Price
 const totalQuantity = orderInfo.products.length
 const totalTaxedPrice = orderInfo.totalPrice
-console.log(totalTaxedPrice)
+// console.log(totalTaxedPrice)
 const orderDetails = document.getElementById('order-details')
 orderDetails.textContent = 'You\'ve paid a total of ' + totalTaxedPrice + ' (incl. tax) for ' + totalQuantity + ' products.'
