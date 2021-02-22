@@ -47,21 +47,21 @@ function singleProduct (cameras, cameraName, cameraDescription, cameraImage, bea
   // Lets fill the 'Single Product' container
   const newSingleProduct = document.getElementById('single-product')
   const newSingleProductBody = document.createElement('div')
-  newSingleProductBody.setAttribute('class', 'd-flex flex-column flex-lg-row w-75 align-items-center shadow rounded bg-primary pb-2')
+  newSingleProductBody.setAttribute('class', 'd-flex flex-column flex-lg-row ml-3 mr-3 align-items-center shadow rounded bg-primary pb-2')
   // Creating a Left and Right side column
   // Left
   const newSingleProductColumnLeft = document.createElement('div')
-  newSingleProductColumnLeft.setAttribute('class', 'flex-column w-50 pl-lg-3 pr-lg-3 rounded-left align-content-center bg-primary')
+  newSingleProductColumnLeft.setAttribute('class', 'flex-column w-50 m-md-0 pl-lg-3 pr-lg-3 rounded-left align-content-center bg-primary')
   // Fill it with the Product Image
   const newSingleProductImage = document.createElement('img')
   newSingleProductImage.setAttribute('id', 'product-img')
   newSingleProductImage.setAttribute('alt', 'Image of an old ' + cameraName)
-  newSingleProductImage.setAttribute('class', 'w-100 rounded mt-5 mt-md-5 mb-md-5 flex-shrink-1 flex-grow-0')
+  newSingleProductImage.setAttribute('class', 'img-thumbnail w-100 rounded mt-3 mt-md-5 mb-md-0 mb-lg-5 flex-shrink-1 flex-grow-0')
   newSingleProductImage.src = cameraImage
 
   // Right
   const newSingleProductColumnRight = document.createElement('div')
-  newSingleProductColumnRight.setAttribute('class', 'flex-column w-50 pl-lg-3 pr-lg-3 rounded-right align-content-center mt-2 mt-md-5 mt-lg-0 bg-primary')
+  newSingleProductColumnRight.setAttribute('class', 'flex-column pl-lg-3 pr-lg-3 rounded-right align-content-center mt-2 mt-md-5 mt-lg-0 mr-3 ml-3 bg-primary')
   // Fetch Single Product Name and add to page
   const newSingleProductName = document.createElement('h4')
   newSingleProductName.setAttribute('id', 'product-name')
@@ -70,7 +70,7 @@ function singleProduct (cameras, cameraName, cameraDescription, cameraImage, bea
   // Fetch Single Product Description and add to page
   const newSingleProductDescription = document.createElement('p')
   newSingleProductDescription.setAttribute('id', 'product-description')
-  newSingleProductDescription.setAttribute('class', 'row font-italic w-100 flex-grow-0 flex-shrink-1 m-1 pt-3')
+  newSingleProductDescription.setAttribute('class', 'row font-italic flex-grow-0 flex-shrink-1 m-1 mb-3 mb-md-3 pt-3')
   newSingleProductDescription.textContent = cameraDescription
 
   // Then lets create the Lens variation selector button with the Price
@@ -78,7 +78,7 @@ function singleProduct (cameras, cameraName, cameraDescription, cameraImage, bea
   selectForm.setAttribute('method', 'post')
   const lensSelectorGroup = document.createElement('select')
   lensSelectorGroup.setAttribute('id', 'selector')
-  lensSelectorGroup.setAttribute('class', 'custom-select bg-secondary border-primary text-white w-50 mt-3 mb-3 mt-md-4 mt-lg-5')
+  lensSelectorGroup.setAttribute('class', 'custom-select bg-secondary border-primary w-50 text-white mt-0 mb-1 ml-md-0 mb-md-3 mt-md-4 mt-lg-5')
   lensSelectorGroup.setAttribute('required', '')
 
   // Select button
@@ -125,7 +125,7 @@ function singleProduct (cameras, cameraName, cameraDescription, cameraImage, bea
   addToCartButton.setAttribute('id', 'add-to-cart')
   addToCartButton.setAttribute('type', 'submit')
   addToCartButton.textContent = 'Select a lens'
-  addToCartButton.setAttribute('class', 'btn btn-secondary mt-sm-3 mt-md-4 mt-lg-5 mr-3 mr-md-3 float-right')
+  addToCartButton.setAttribute('class', 'btn btn-secondary mt-md-4 mt-lg-5 mr-md-3 float-right')
 
   // Left Column containing
   newSingleProductColumnLeft.appendChild(newSingleProductImage)

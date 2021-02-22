@@ -6,6 +6,7 @@ let cart = []
 function saveCart () {
   window.localStorage.setItem('Cart', JSON.stringify(cart))
 }
+
 // Add item to cart
 export function addToCart (product) {
   cart.push(product)
@@ -13,6 +14,7 @@ export function addToCart (product) {
   document.location.reload()
   // console.log(cart)
 }
+
 // Load existing Cart on Page load
 function loadCart () {
   cart = JSON.parse(window.localStorage.getItem('Cart'))
@@ -28,15 +30,17 @@ if (itemNumbers) {
   document.querySelector('#cart span').textContent = itemNumbers
 }
 
-const orderInformation = {
-  contact: {},
-  products: []
-}
-
+// The following code is only going to be loaded on the Cart page (/cart/index.html) if the cart IS empty
 if ((window.location.href.indexOf('/cart/index.html') !== -1) && (window.localStorage.getItem('Cart') === null)) {
   document.getElementById('details-form').style.display = 'none'
   document.getElementById('order-table').style.display = 'none'
+  // The following code is only going to be loaded on the Cart page (/cart/index.html) if the cart IS NOT empty
 } else if ((window.location.href.indexOf('/cart/index.html') !== -1) && (window.localStorage.getItem('Cart') !== null)) {
+  // Remove All items from Cart
+  document.getElementById('remove-all').addEventListener('click', () => {
+    window.localStorage.clear()
+    window.location.reload()
+  })
   function listCartItems () {
     let cartItems = window.localStorage.getItem('Cart')
     cartItems = JSON.parse(cartItems)
@@ -57,7 +61,6 @@ if ((window.location.href.indexOf('/cart/index.html') !== -1) && (window.localSt
     const cartItemsSection = document.getElementById('cart-items')
     // Lets list all items from the Local Storage Cart
     cartItems.forEach((product, index) => {
-      const cameraId = product._id
       const cameraName = product.name
       const cameraImage = product.image
       const cameraPrice = product.price
@@ -71,7 +74,7 @@ if ((window.location.href.indexOf('/cart/index.html') !== -1) && (window.localSt
       // First create a row for each of the Cart Items
       const cartItemsRow = document.createElement('div')
       cartItemsRow.setAttribute('id', 'product-row')
-      cartItemsRow.setAttribute('class', 'd-flex w-50 align-items-center border rounded shadow-lg mb-2')
+      cartItemsRow.setAttribute('class', 'd-flex align-items-center border rounded shadow-lg mb-2')
       cartItemsSection.appendChild(cartItemsRow)
 
       // How the ROW made: Image, Details(Name), Total Price, Remove Item
@@ -115,8 +118,6 @@ if ((window.location.href.indexOf('/cart/index.html') !== -1) && (window.localSt
       listedProductPrice.textContent = beautyItemPrice
       // Merge Product Price with Product Price Column
       listedProductPriceCol.appendChild(listedProductPrice)
-
-      orderInformation.products.push(cameraId)
     })
 
     /// /////////////////////////////////////////////////////////////
@@ -133,7 +134,7 @@ if ((window.location.href.indexOf('/cart/index.html') !== -1) && (window.localSt
       minimumFractionDigits: 0,
       maximumFractionDigits: 2
     })
-    // Load into HTML Total Price excluding Tax
+    // Load into HTML the Total Price excluding Tax
     const totalPrice = document.getElementById('total-price')
     totalPrice.textContent = beautyTotalPrice
     //
@@ -146,117 +147,10 @@ if ((window.location.href.indexOf('/cart/index.html') !== -1) && (window.localSt
       minimumFractionDigits: 0,
       maximumFractionDigits: 2
     })
-    // Load into HTML Price including Tax
+    window.localStorage.setItem('taxedTotal', beautyTaxedTotal)
+    // Load into HTML the Price including Tax
     const taxedTotalPrice = document.getElementById('taxed-total')
     taxedTotalPrice.textContent = beautyTaxedTotal
-    /// ////////////////////////////////////////////////////////////////
-    // Lets Create the Customer Details Form requirements for validation
-    // Load form elements
-    const customerFirstName = document.getElementById('customer-firstname')
-    const customerLastName = document.getElementById('customer-lastname')
-    const customerEmail = document.getElementById('customer-email')
-    const customerAddress = document.getElementById('customer-address')
-    const customerAddress2 = document.getElementById('customer-address2')
-    const customerTown = document.getElementById('customer-town')
-    const customerPostcode = document.getElementById('customer-postcode')
-
-    const validateCustomerInput = () => {
-      // Specifying validation criteria
-      const isNotEmpty = value => value !== ''
-      const isLongEnough = value => value.length >= 3
-      const containNumber = /[0-9]/
-      const doNotContainNumber = value => !value.match(containNumber)
-      const specialCharacter = /[$£°&+,:;=?@#|'<>.^*()!"{}_]/
-      const doNotContainSpecialCharacter = value => !value.match(specialCharacter)
-      const regexEmail = /.+@.+\..+/
-      const isValidEmail = (value) => !!value.match(regexEmail)
-      const isValidInput = (value) => isNotEmpty(value) && isLongEnough(value) && doNotContainNumber(value) && doNotContainSpecialCharacter(value)
-
-      const firstName = customerFirstName.value
-      const lastName = customerLastName.value
-      const email = customerEmail.value
-      const address = customerAddress.value
-      const address2 = customerAddress2.value
-      const city = customerTown.value
-      const postcode = customerPostcode.value
-
-      // Validation Process
-      // First Name
-      if (isValidInput(firstName)) {
-        return firstName
-      } else {
-        customerFirstName.setAttribute('class', 'form-control alert-danger')
-      }
-      // Last Name
-      if (isValidInput(lastName)) {
-        return lastName
-      } else {
-        customerLastName.setAttribute('class', 'form-control alert-danger')
-      }
-      // Email
-      if (isValidEmail(email)) {
-        return email
-      } else {
-        customerEmail.setAttribute('class', 'form-control alert-danger')
-      }
-      // Address - Only for the first input
-      if (isNotEmpty(address) && isLongEnough(address)) {
-        return address
-      } else {
-        customerAddress.setAttribute('class', 'form-control alert-danger')
-      }
-      // Town/City
-      if (isValidInput(city)) {
-        return city
-      } else {
-        customerTown.setAttribute('class', 'form-control alert-danger')
-      }
-      // Postcode
-      if (isValidInput(postcode)) {
-        return postcode
-      } else {
-        customerPostcode.setAttribute('class', 'form-control alert-danger')
-      }
-    }
-
-    const contact = {
-      firstName: customerFirstName,
-      lastName: customerLastName,
-      email: customerEmail,
-      address: customerAddress,
-      address2: customerAddress2,
-      city: customerTown,
-      postcode: customerPostcode
-    }
-    orderInformation.contact = contact
-
-    const postData = async (method, url, orderInformation) => {
-      const response = await window.fetch(url, {
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        method,
-        body: JSON.stringify(orderInformation)
-      })
-      return await response.json()
-    }
-
-    document.getElementById('checkout').addEventListener('click', async function (event) {
-      event.preventDefault()
-      if (validateCustomerInput()) {
-        document.getElementById('checkout').textContent = 'Submitting order'
-        const validatedForm = validateCustomerInput()
-        if (validatedForm !== false) {
-          const response = await postData('POST', 'http://localhost:3000/api/cameras/order', orderInformation)
-          window.localStorage.setItem('orderId', response.orderId)
-          window.localStorage.setItem('orderInformation', JSON.stringify(orderInformation.contact))
-          window.setTimeout(function () { window.location = `../confirmation.html?orderId=${response.orderId}` }, 1000)
-        }
-      } else {
-        validateCustomerInput()
-      }
-    })
-    console.log(orderInformation)
   }
   listCartItems()
 }

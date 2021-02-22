@@ -7,7 +7,7 @@ export function createProducts (product) {
 
   // Creating a ProductCard
   const newProductCard = document.createElement('div')
-  newProductCard.setAttribute('class', 'card border-secondary shadow ml-5 mr-5 mt-5')
+  newProductCard.setAttribute('class', 'card border-secondary shadow ml-sm-5 mr-sm-5 mt-5')
   // Adding a Tooltip for Visual Feedback
   newProductCard.setAttribute('dataToggle', 'tooltip')
   newProductCard.setAttribute('dataPlacement', 'right')

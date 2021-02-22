@@ -49,46 +49,34 @@
       <!-- Here comes the JavaScript creation -->
       </section>
       <div class="row flex-row justify-content-center mt-2 pb-5 mb-5" id="details-form">
-        <form class="flex-column p-3 pb-5 rounded shadow align-content-center bg-primary needs-validation" id="customer-details">
-          <h2 class="row justify-content-center mb-4 text-black text-uppercase">Customer Details</h2>
+        <form class="flex-column m-2 p-2 p-md-3 pb-md-5 rounded shadow align-content-center bg-primary needs-validation" id="customer-details">
+          <h3 id="message" class="row justify-content-center mb-md-4 text-black text-uppercase">Customer Details</h3>
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="customer-firstname">First Name*</label>
-              <input type="text" name="input" class="form-control" id="customer-firstname" placeholder="First name" required>
-              <div class="invalid-feedback" id="invalid-firstname">
-              </div>
+              <input type="text" name="customer-firstname" class="form-control item" id="customer-firstname" placeholder="First name" pattern="a-zA-Z" required>
             </div>
             <div class="form-group col-md-6">
             <label for="customer-lastname">Last Name*</label>
-              <input type="text" name="input" class="form-control" id="customer-lastname" placeholder="Last name" required>
-              <div class="invalid-feedback" id="invalid-lastname">
-              </div>
+              <input type="text" name="customer-lastname" class="form-control item" id="customer-lastname" placeholder="Last name" required>
             </div>
           </div>
           <div class="form-group">
             <label for="customer-email">E-mail*</label>
-            <input type="email" name="input" class="form-control" id="customer-email" placeholder="E-mail" required>
-            <div class="invalid-feedback" id="invalid-email">
-            </div>
+            <input type="email" name="email" class="form-control item" id="customer-email" placeholder="E-mail" required>
           </div>
           <div class="form-group">
             <label for="customer-address">Address*</label>
-            <input type="text" name="input" class="form-control" id="customer-address" placeholder="1234 Main St" required>
-            <div class="invalid-feedback" id="invalid-address">
-            </div>
+            <input type="text" name="customer-address" class="form-control item" id="customer-address" placeholder="1234 Main St" required>
           </div>
           <div class="form-group">
             <label for="customer-address2">Address 2</label>
-            <input type="text" name="input" class="form-control" id="customer-address2" placeholder="Optional">
-            <div class="invalid-feedback" id="invalid-address2">
-            </div>
+            <input type="text" name="customer-address2" class="form-control item" id="customer-address2" placeholder="Optional">
           </div>
           <div class="form-row">
             <div class="col-md-5">
               <label for="customer-town">Town/City*</label>
-              <input type="text" name="input" class="form-control" id="customer-town" placeholder="New York" required>
-              <div class="invalid-feedback" id="invalid-town">
-              </div>
+              <input type="text" name="customer-town" class="form-control item" id="customer-town" placeholder="New York" required>
             </div>
             <div class="form-group col-md-3">
               <label for="customer-county">County/State</label>
@@ -99,20 +87,21 @@
             </div>
             <div class="col-md-4">
               <label for="customer-postcode">Postcode*</label>
-              <input type="text" name="input" class="form-control" id="customer-postcode" placeholder="10001" required>
-              <div class="invalid-feedback" id="invalid-postcode">
-              </div>
+              <input type="text" name="customer-postcode" class="form-control item" id="customer-postcode" placeholder="10001" required>
             </div>
           </div>
           <div class="form-group">
             <p class="float-left mt-md-3 font-italic">* Details are required</p>
           </div>
         </form>
-        <form class="col-auto h-25 ml-md-2 mt-md-3 mt-xl-0 p-4 bg-primary rounded shadow-lg" id="order-table">
+        <div class="col-md-auto h-25 mt-2 ml-md-2 mt-md-3 mt-xl-0 p-4 bg-primary rounded shadow-lg" id="order-table">
         <table class="table table-hover table-responsive">
           <thead>
             <tr>
-              <th class="col-auto text-black font-italic text-uppercase">Order Total</th>
+              <th class="col-auto text-black font-italic align-middle text-uppercase">Order Total</th>
+              <th></th>
+              <th></th>
+              <th class="col-auto"><button id="remove-all" type="button" class="btn btn-block btn-danger">Remove All Items</button></th>
             </tr>
             <tr>
               <th>Qty</th>
@@ -124,14 +113,14 @@
           <tbody>
             <tr>
               <th scope="row" id="final-quantity">1</th>
-              <td id="total-price">285</td>
+              <td id="total-price"></td>
               <td>5%</td>
-              <td id="taxed-total">300!</td>
+              <td id="taxed-total"></td>
             </tr>
           </tbody>
         </table>
         <button id="checkout" type="submit" class="btn btn-block btn-secondary">Checkout</button>
-      </form>
+      </div>
       </div>
     </div>
 
@@ -157,5 +146,6 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
         <!--JavaScript stored locally-->
         <script src="cart.js" type="module"></script>
+        <script src="form.js" type="module"></script>
 </body>
 </html>
