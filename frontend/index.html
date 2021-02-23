@@ -1,34 +1,49 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <!-- Custom built theme - This already includes Bootstrap 4 -->
-        <link rel="stylesheet" href="css/mytheme.css">
-        <!--Remote served FontAwesome Stylesheet-->
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css">
-        <title>Orinoco - Home Page</title>
-      </head>
-<body>
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Custom built theme - This already includes Bootstrap 4 -->
+    <link rel="stylesheet" href="css/mytheme.css" />
+    <!--Remote served FontAwesome Stylesheet-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" />
+    <title>Orinoco - Home Page</title>
+  </head>
+  <body>
     <header class="bg-primary shadow">
-        <div class="container-fluid">
-            <nav class="navbar justify-content-center navbar-expand-md navbar-dark bg-primary">
-              <a class="navbar-brand" href="index.html">
-                <img src="img/orinoco_logo.png" alt="Orinoco Logo" />
-              </a>
-              <div id="navbarSupportedContent" class="ml-md-auto">
-                <ul class="navbar-nav ml-auto d-flex align-items-center">
-                  <li class="nav-item mb-4 mb-md-5 pb-5 pb-md-3 pb-lg-0 pr-1" id="cart">
-                    <a class="nav-link" href="./pages/cart/index.html" data-toggle="tooltip" data-placement="right" title="Tap to view Cart">
-                      <span id="item-in-cart" class="badge badge-pill badge-secondary border-secondary text-white ml-4 ml-md-3 mt-0 mt-md-2">0</span>
-                      <img id="cart-icon" class="mb-md-5" alt="Shopping cart icon" src="./img/shopping-cart-solid.svg"/>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </nav>
-        </div>
+      <div class="container-fluid">
+        <nav class="navbar justify-content-center navbar-expand-md navbar-dark bg-primary">
+          <a class="navbar-brand" href="index.html">
+            <img src="img/orinoco_logo.png" alt="Orinoco Logo" />
+          </a>
+          <div id="navbarSupportedContent" class="ml-md-auto">
+            <ul class="navbar-nav ml-auto d-flex align-items-center">
+              <li class="nav-item mb-4 mb-md-5 pb-5 pb-md-3 pb-lg-0 pr-1" id="cart">
+                <a
+                  class="nav-link"
+                  href="./pages/cart/index.html"
+                  data-toggle="tooltip"
+                  data-placement="right"
+                  title="Tap to view Cart"
+                >
+                  <span
+                    id="item-in-cart"
+                    class="badge badge-pill badge-secondary border-secondary text-white ml-4 ml-md-3 mt-0 mt-md-2"
+                    >0</span
+                  >
+                  <img
+                    id="cart-icon"
+                    class="mb-md-5"
+                    alt="Shopping cart icon"
+                    src="./img/shopping-cart-solid.svg"
+                  />
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
     </header>
 
     <!--Loading spinner and Product section-->
@@ -39,33 +54,68 @@
       <!-- Product List -->
       <section id="product-list" class="row justify-content-center">
         <div class="jumbotron jumbotron-fluid bg-primary shadow-lg rounded-bottom w-100">
-        <h2 class="display-4 text-uppercase text-center">Welcome to Orinoco!</h2>
-        <p class="lead text-center">Choose a camera from our selection</p>
+          <h2 class="display-4 text-uppercase text-center">Welcome to Orinoco!</h2>
+          <p class="lead text-center">Choose a camera from our selection</p>
         </div>
       </section>
     </div>
-    
+
     <!--Footer-->
     <footer class="bg-primary fixed-bottom">
-			<div class="container">
-			  <div class="row">
-				<nav class="col navbar navbar-expand">
-				  <div class="collapse navbar-collapse footer-text justify-content-center">
-            <a class="nav-link text-secondary font-weight-bold" href="index.html" data-toggle="tooltip" data-placement="right" title="Back to Home Page">Home</a>
-            <p class="text-secondary font-weight-bold text-center pt-3"><script>document.write(new Date().getFullYear())</script></p>
-						<a class="nav-link text-secondary font-weight-bold" href="#" data-toggle="tooltip" data-placement="right" title="Contact us">Contact</a>
-				  </div>
-				</nav>
-			  </div>
-			</div>
+      <div class="container">
+        <div class="row">
+          <nav class="col navbar navbar-expand">
+            <div class="collapse navbar-collapse footer-text justify-content-center">
+              <a
+                class="nav-link text-secondary font-weight-bold"
+                href="index.html"
+                data-toggle="tooltip"
+                data-placement="right"
+                title="Back to Home Page"
+                >Home</a
+              >
+              <p class="text-secondary font-weight-bold text-center pt-3">
+                <script>
+                  document.write(new Date().getFullYear());
+                </script>
+              </p>
+              <a
+                class="nav-link text-secondary font-weight-bold"
+                href="#"
+                data-toggle="tooltip"
+                data-placement="right"
+                title="Contact us"
+                >Contact</a
+              >
+            </div>
+          </nav>
+        </div>
+      </div>
     </footer>
-    
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-            <!--JavaScript stored locally - loaded dynamically with index.js-->
-            <script src="index.js" type="module"></script>
-            <script src="./pages/cart/cart.js" type="module"></script>
-</body>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+      integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
+      integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+      integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+      crossorigin="anonymous"
+    ></script>
+    <!--JavaScript stored locally - loaded dynamically with index.js-->
+    <script src="index.js" type="module"></script>
+    <script src="./pages/cart/cart.js" type="module"></script>
+  </body>
 </html>

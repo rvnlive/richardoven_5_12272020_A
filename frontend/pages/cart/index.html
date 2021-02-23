@@ -1,40 +1,72 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <!-- Custom built theme - This already includes Bootstrap 4 -->
-        <link rel="stylesheet" href="../../css/mytheme.css">
-        <!--Remote served FontAwesome Stylesheet-->
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css">
-        <title>Orinoco - Cart</title>
-      </head>
-<body>
-  <header class="bg-primary shadow rounded-bottom">
-    <div class="container-fluid">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Custom built theme - This already includes Bootstrap 4 -->
+    <link rel="stylesheet" href="../../css/mytheme.css" />
+    <!--Remote served FontAwesome Stylesheet-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" />
+    <title>Orinoco - Cart</title>
+  </head>
+  <body>
+    <header class="bg-primary shadow rounded-bottom">
+      <div class="container-fluid">
         <nav class="navbar justify-content-center navbar-expand-md navbar-dark bg-primary">
           <a class="navbar-brand" href="../../index.html">
             <img src="../../img/orinoco_logo.png" alt="Orinoco Logo" />
           </a>
-          <button class="navbar-toggler bg-secondary" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <button
+            class="navbar-toggler bg-secondary"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
             <span class="navbar-toggler-icon"></span>
           </button>
           <div id="navbarSupportedContent" class="collapse navbar-collapse">
-              <ul class="navbar-nav ml-auto d-flex align-items-center">
-                  <li class="breadcrumb-item"><a class="nav-item btn btn-secondary waves-effect shadow rounded" href="../../index.html" data-toggle="tooltip" data-placement="right" title="Back to Home Page">Home</a></li>
-                  <li class="breadcrumb-item p-2 active" aria-current="page">Cart</li>
+            <ul class="navbar-nav ml-auto d-flex align-items-center">
+              <li class="breadcrumb-item">
+                <a
+                  class="nav-item btn btn-secondary waves-effect shadow rounded"
+                  href="../../index.html"
+                  data-toggle="tooltip"
+                  data-placement="right"
+                  title="Back to Home Page"
+                  >Home</a
+                >
+              </li>
+              <li class="breadcrumb-item p-2 active" aria-current="page">Cart</li>
               <li class="nav-item mb-4 mb-md-5 pb-5 pb-md-3 pb-lg-0 pr-1" id="cart">
-                <a class="nav-link" href="index.html" data-toggle="tooltip" data-placement="right" title="Tap to view Cart">
-                  <span id="item-in-cart" class="badge badge-pill badge-secondary border-secondary text-white ml-4 ml-md-3 mt-0 mt-md-2">0</span>
-                  <img id="cart-icon" class="mb-md-5" alt="Shopping cart icon" src="../../img/shopping-cart-solid.svg"/>
+                <a
+                  class="nav-link"
+                  href="index.html"
+                  data-toggle="tooltip"
+                  data-placement="right"
+                  title="Tap to view Cart"
+                >
+                  <span
+                    id="item-in-cart"
+                    class="badge badge-pill badge-secondary border-secondary text-white ml-4 ml-md-3 mt-0 mt-md-2"
+                    >0</span
+                  >
+                  <img
+                    id="cart-icon"
+                    class="mb-md-5"
+                    alt="Shopping cart icon"
+                    src="../../img/shopping-cart-solid.svg"
+                  />
                 </a>
               </li>
             </ul>
           </div>
         </nav>
-    </div>
-</header>
+      </div>
+    </header>
 
     <!--Loading spinner and Product section-->
     <div class="container">
@@ -42,38 +74,93 @@
         <span class="sr-only">Loading...</span>
       </div>
       <h2 class="sr-only">Cart Page</h2>
-      <section id="cart-items" class="d-flex flex-column flex-wrap align-content-center flex-shrink-1 mb-2 pt-3">
-      <!-- Here comes the JavaScript creation -->
+      <section
+        id="cart-items"
+        class="d-flex flex-column flex-wrap align-content-center flex-shrink-1 mb-2 pt-3"
+      >
+        <!-- Here comes the JavaScript creation -->
       </section>
       <div class="row flex-row justify-content-center mt-2 pb-5 mb-5" id="details-form">
-        <form class="flex-column m-2 p-2 p-md-3 pb-md-5 rounded shadow align-content-center bg-primary needs-validation" id="customer-details">
-          <h3 id="message" class="row justify-content-center mb-md-4 text-black text-uppercase">Customer Details</h3>
+        <form
+          class="flex-column m-2 p-2 p-md-3 pb-md-5 rounded shadow align-content-center bg-primary needs-validation"
+          id="customer-details"
+        >
+          <h3 id="message" class="row justify-content-center mb-md-4 text-black text-uppercase">
+            Customer Details
+          </h3>
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="customer-firstname">First Name*</label>
-              <input type="text" name="customer-firstname" class="form-control item" id="customer-firstname" placeholder="First name" pattern="a-zA-Z" required>
+              <input
+                type="text"
+                name="customer-firstname"
+                class="form-control item"
+                id="customer-firstname"
+                placeholder="First name"
+                pattern="a-zA-Z"
+                required
+              />
+              <div id="firstname-feedback"></div>
             </div>
             <div class="form-group col-md-6">
-            <label for="customer-lastname">Last Name*</label>
-              <input type="text" name="customer-lastname" class="form-control item" id="customer-lastname" placeholder="Last name" required>
+              <label for="customer-lastname">Last Name*</label>
+              <input
+                type="text"
+                name="customer-lastname"
+                class="form-control item"
+                id="customer-lastname"
+                placeholder="Last name"
+                required
+              />
+              <div id="lastname-feedback"></div>
             </div>
           </div>
           <div class="form-group">
             <label for="customer-email">E-mail*</label>
-            <input type="email" name="email" class="form-control item" id="customer-email" placeholder="E-mail" required>
+            <input
+              type="email"
+              name="email"
+              class="form-control item"
+              id="customer-email"
+              placeholder="E-mail"
+              required
+            />
+            <div id="email-feedback"></div>
           </div>
           <div class="form-group">
             <label for="customer-address">Address*</label>
-            <input type="text" name="customer-address" class="form-control item" id="customer-address" placeholder="1234 Main St" required>
+            <input
+              type="text"
+              name="customer-address"
+              class="form-control item"
+              id="customer-address"
+              placeholder="1234 Main St"
+              required
+            />
+            <div id="address-feedback"></div>
           </div>
           <div class="form-group">
             <label for="customer-address2">Address 2</label>
-            <input type="text" name="customer-address2" class="form-control item" id="customer-address2" placeholder="Optional">
+            <input
+              type="text"
+              name="customer-address2"
+              class="form-control item"
+              id="customer-address2"
+              placeholder="Optional"
+            />
           </div>
           <div class="form-row">
             <div class="col-md-5">
               <label for="customer-town">Town/City*</label>
-              <input type="text" name="customer-town" class="form-control item" id="customer-town" placeholder="New York" required>
+              <input
+                type="text"
+                name="customer-town"
+                class="form-control item"
+                id="customer-town"
+                placeholder="New York"
+                required
+              />
+              <div id="town-feedback"></div>
             </div>
             <div class="form-group col-md-3">
               <label for="customer-county">County/State</label>
@@ -82,67 +169,106 @@
                 <option>...</option>
               </select>
             </div>
-            <div class="col-md-4">
+            <div class="form-group col-md-4">
               <label for="customer-postcode">Postcode*</label>
-              <input type="text" name="customer-postcode" class="form-control item" id="customer-postcode" placeholder="10001" required>
+              <input
+                type="text"
+                name="customer-postcode"
+                class="form-control item"
+                id="customer-postcode"
+                placeholder="10001"
+                required
+              />
+              <div id="postcode-feedback"></div>
             </div>
           </div>
           <div class="form-group">
             <p class="float-left mt-md-3 font-italic">* Details are required</p>
           </div>
         </form>
-        <div class="col-md-auto h-25 mt-2 ml-md-2 mt-md-3 mt-xl-0 p-4 bg-primary rounded shadow-lg" id="order-table">
-        <table class="table table-hover table-responsive">
-          <thead>
-            <tr>
-              <th class="col-auto text-black font-italic align-middle text-uppercase">Order Total</th>
-              <th></th>
-              <th></th>
-              <th class="col-auto"><button id="remove-all" type="button" class="btn btn-block btn-danger">Remove All Items</button></th>
-            </tr>
-            <tr>
-              <th>Qty</th>
-              <th>Price (ex.T)</th>
-              <th>Tax</th>
-              <th>Price (in.T)</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row" id="final-quantity">1</th>
-              <td id="total-price"></td>
-              <td>5%</td>
-              <td id="taxed-total"></td>
-            </tr>
-          </tbody>
-        </table>
-        <button id="checkout" type="submit" class="btn btn-block btn-secondary">Checkout</button>
-      </div>
+        <div
+          class="col-md-auto h-25 mt-2 ml-md-2 mt-md-3 mt-xl-0 p-4 bg-primary rounded shadow-lg"
+          id="order-table"
+        >
+          <table class="table table-hover table-responsive">
+            <thead>
+              <tr>
+                <th class="col-auto text-black font-italic align-middle text-uppercase">
+                  Order Total
+                </th>
+                <th></th>
+                <th></th>
+                <th class="col-auto">
+                  <button id="remove-all" type="button" class="btn btn-block btn-danger">
+                    Remove All Items
+                  </button>
+                </th>
+              </tr>
+              <tr>
+                <th>Qty</th>
+                <th>Price (ex.T)</th>
+                <th>Tax</th>
+                <th>Price (in.T)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row" id="final-quantity">1</th>
+                <td id="total-price"></td>
+                <td>5%</td>
+                <td id="taxed-total"></td>
+              </tr>
+            </tbody>
+          </table>
+          <button id="checkout" type="submit" class="btn btn-block btn-secondary">Checkout</button>
+        </div>
       </div>
     </div>
 
-
     <!--Footer-->
     <footer class="bg-primary rounded fixed-bottom mt-5">
-			<div class="container">
-			  <div class="row">
-				<nav class="col navbar navbar-expand">
-				  <div class="collapse navbar-collapse footer-text justify-content-center">
-            <a class="nav-link text-secondary font-weight-bold" href="../../index.html" data-toggle="tooltip" data-placement="right" title="Back to Home Page">Home</a>
-            <p class="text-secondary font-weight-bold text-center pt-3"><script>document.write(new Date().getFullYear())</script></p>
-						<a class="nav-link text-secondary font-weight-bold" href="#">Contact</a>
-				  </div>
-				</nav>
-			  </div>
-			</div>
+      <div class="container">
+        <div class="row">
+          <nav class="col navbar navbar-expand">
+            <div class="collapse navbar-collapse footer-text justify-content-center">
+              <a
+                class="nav-link text-secondary font-weight-bold"
+                href="../../index.html"
+                data-toggle="tooltip"
+                data-placement="right"
+                title="Back to Home Page"
+                >Home</a
+              >
+              <p class="text-secondary font-weight-bold text-center pt-3">
+                <script>
+                  document.write(new Date().getFullYear());
+                </script>
+              </p>
+              <a class="nav-link text-secondary font-weight-bold" href="#">Contact</a>
+            </div>
+          </nav>
+        </div>
+      </div>
     </footer>
-    
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
-        <!--JavaScript stored locally-->
-        <script src="cart.js" type="module"></script>
-        <script src="form.js" type="module"></script>
-</body>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+      integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
+      integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
+      crossorigin="anonymous"
+    ></script>
+    <!--JavaScript stored locally-->
+    <script src="cart.js" type="module"></script>
+    <script src="form.js" type="module"></script>
+  </body>
 </html>

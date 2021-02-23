@@ -33,65 +33,94 @@ if ((window.location.href.indexOf('/cart/index.html') !== -1) && (window.localSt
   // Lets Create the Customer Details Form requirements for validation
   // Load form elements
   const firstName = form[0]
+  const firstNameFeedback = document.getElementById('firstname-feedback')
+
   const lastName = form[1]
+  const lastNameFeedback = document.getElementById('lastname-feedback')
+
   const email = form[2]
+  const emailFeedback = document.getElementById('email-feedback')
+
   const address = form[3]
+  const addressFeedback = document.getElementById('address-feedback')
+
   const city = form[5]
+  const cityFeedback = document.getElementById('town-feedback')
+
   const postcode = form[7]
+  const postcodeFeedback = document.getElementById('postcode-feedback')
 
   // Lets validate the User Inputs
   const formValidate = () => {
     if (isValidInput(firstName.value)) {
-    //   firstName.valid()
+      firstName.setAttribute('class', 'form-control item border-secondary')
+      firstNameFeedback.setAttribute('class', 'text-secondary')
+      firstNameFeedback.textContent = 'Looks good!'
     } else {
       firstName.focus()
       firstName.setAttribute('class', 'form-control item border-danger')
-      firstName.setAttribute('placeholder', 'Missing or Incorrect!')
+      firstNameFeedback.setAttribute('class', 'text-danger')
+      firstNameFeedback.textContent = 'Missing or Incorrect!'
       return false
     }
 
     if (isValidInput(lastName.value)) {
-    //   lastName.valid()
+      lastName.setAttribute('class', 'form-control item border-secondary')
+      lastNameFeedback.setAttribute('class', 'text-secondary')
+      lastNameFeedback.textContent = 'Looks good!'
     } else {
       lastName.focus()
       lastName.setAttribute('class', 'form-control item border-danger')
-      lastName.setAttribute('placeholder', 'Missing or Incorrect!')
+      lastNameFeedback.setAttribute('class', 'text-danger')
+      lastNameFeedback.textContent = 'Missing or Incorrect!'
       return false
     }
 
     if (isValidEmail(email.value)) {
-    //   email.valid()
+      email.setAttribute('class', 'form-control item border-secondary')
+      emailFeedback.setAttribute('class', 'text-secondary')
+      emailFeedback.textContent = 'Looks good!'
     } else {
       email.focus()
       email.setAttribute('class', 'form-control item border-danger')
-      email.setAttribute('placeholder', 'Missing or Incorrect!')
+      emailFeedback.setAttribute('class', 'text-danger')
+      emailFeedback.textContent = 'Missing or Incorrect!'
       return false
     }
 
-    if (isNotEmpty(address.value) && isLongEnough(address.value)) {
-    //   address.valid()
+    if (isNotEmpty(address.value) && isLongEnough(address.value) && doNotContainSpecialCharacter(address.value)) {
+      address.setAttribute('class', 'form-control item border-secondary')
+      addressFeedback.setAttribute('class', 'text-secondary')
+      addressFeedback.textContent = 'Looks good!'
     } else {
       address.focus()
       address.setAttribute('class', 'form-control item border-danger')
-      address.setAttribute('placeholder', 'Missing or Incorrect!')
+      addressFeedback.setAttribute('class', 'text-danger')
+      addressFeedback.textContent = 'Missing or Incorrect!'
       return false
     }
 
     if (isValidInput(city.value)) {
-    //   city.valid()
+      city.setAttribute('class', 'form-control item border-secondary')
+      cityFeedback.setAttribute('class', 'text-secondary')
+      cityFeedback.textContent = 'Looks good!'
     } else {
       city.focus()
       city.setAttribute('class', 'form-control item border-danger')
-      city.setAttribute('placeholder', 'Missing or Incorrect!')
+      cityFeedback.setAttribute('class', 'text-danger')
+      cityFeedback.textContent = 'Missing or Incorrect!'
       return false
     }
 
-    if (doNotContainSpecialCharacter(postcode.value)) {
-    //   postcode.valid()
+    if (doNotContainSpecialCharacter(postcode.value) && isLongEnough(postcode.value)) {
+      postcode.setAttribute('class', 'form-control item border-secondary')
+      postcodeFeedback.setAttribute('class', 'text-secondary')
+      postcodeFeedback.textContent = 'Looks good!'
     } else {
       postcode.focus()
       postcode.setAttribute('class', 'form-control item border-danger')
-      postcode.setAttribute('placeholder', 'Missing or Incorrect!')
+      postcodeFeedback.setAttribute('class', 'text-danger')
+      postcodeFeedback.textContent = 'Missing or Incorrect!'
       return false
     }
 
