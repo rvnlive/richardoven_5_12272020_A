@@ -12,10 +12,17 @@ orderConfirmWithId.textContent = 'Order ID: ' + orderId
 
 // Brief details such as Total Product Quantity, Total Taxed Price
 const totalQuantity = orderInfo.products.length
-const totalTaxedPrice = orderInfo.totalPrice
+const totalTaxedPrice = JSON.parse(orderInfo.totalPrice)
+// Beautify Taxed Total - Currency Sign etc.
+const beautyTaxedTotal = totalTaxedPrice.toLocaleString('en-US', {
+  style: 'currency',
+  currency: 'USD',
+  minimumFractionDigits: 0,
+  maximumFractionDigits: 2
+})
 // console.log(totalTaxedPrice)
 const orderDetails = document.getElementById('order-details')
-orderDetails.textContent = 'You\'ve paid a total of ' + totalTaxedPrice + ' (incl. tax) for ' + totalQuantity + ' products.'
+orderDetails.textContent = 'You\'ve paid a total of ' + beautyTaxedTotal + ' (incl. tax) for ' + totalQuantity + ' products.'
 
 // 'Fresh Start' button - clear all the Storages - Local and Session
 document.getElementById('fresh-start').addEventListener('click', () => {

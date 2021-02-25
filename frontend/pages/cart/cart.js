@@ -147,7 +147,7 @@ if ((window.location.href.indexOf('/cart/index.html') !== -1) && (window.localSt
       minimumFractionDigits: 0,
       maximumFractionDigits: 2
     })
-    window.localStorage.setItem('taxedTotal', beautyTaxedTotal)
+    window.localStorage.setItem('taxedTotal', totalCartPrice)
     // Load into HTML the Price including Tax
     const taxedTotalPrice = document.getElementById('taxed-total')
     taxedTotalPrice.textContent = beautyTaxedTotal
